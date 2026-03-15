@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eligibility & Checklist Builder - Secured Direct</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen pb-12">
+
+    <header class="bg-white shadow-sm sticky top-0 z-20">
+        <div class="max-w-4xl mx-auto px-3 md:px-4 py-2 md:py-3 flex justify-between items-center">
+            <h1 class="text-base md:text-xl font-bold text-blue-800 truncate pr-2 shrink" data-i18n="app_title">Eligibility & Checklist Builder</h1>
+            <select id="langSelector" class="bg-slate-100 border border-slate-300 text-xs md:text-sm rounded-md py-1 px-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shrink-0" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="hi">हिंदी</option>
+                <option value="te">తెలుగు</option>
+                <option value="mr">मराठी</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-2 sm:px-4 py-4 md:py-8">
+        
+        <div class="mb-4 md:mb-8 flex items-center justify-between relative" id="progressContainer">
+            <div class="w-full absolute top-1/2 left-0 h-1 bg-slate-200 -z-10 transform -translate-y-1/2"></div>
+            <div class="w-1/3 absolute top-1/2 left-0 h-1 bg-blue-600 -z-10 transform -translate-y-1/2 transition-all duration-500" id="progressBar"></div>
+            
+            <div class="flex flex-col items-center bg-slate-50 px-2" id="navStep1">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mb-1">1</div>
+                <span class="text-xs font-bold text-blue-800" data-i18n="step_1">Eligibility & Scoring</span>
+            </div>
+            <div class="flex flex-col items-center bg-slate-50 px-2 opacity-50" id="navStep2">
+                <div class="w-8 h-8 rounded-full bg-slate-300 text-slate-600 font-bold flex items-center justify-center mb-1" id="navStep2Icon">2</div>
+                <span class="text-xs font-bold text-slate-600" id="navStep2Text" data-i18n="step_2">Admin & Checklist</span>
+            </div>
+        </div>
+
+        <div id="phase1Container" class="fade-in">
+            
+            <div id="section1" class="form-section bg-white rounded-xl shadow-md p-4 sm:p-8 mb-6 fade-in">
+                <h2 class="text-lg font-bold mb-4 border-b pb-2 text-blue-800" data-i18n="sec1_title">Section 1: Applicant Profile</h2>
+                
+                <div class="mb-6 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label class="block font-medium mb-4 flex justify-between items-center">
+                        <span data-i18n="q2_label">Age of Main Applicant?</span>
+                        <span class="text-xl font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-lg border border-blue-200 shadow-sm" id="ageDisplay">30 Years</span>
+                    </label>
+                    <input type="range" id="q_age" min="18" max="75" value="30" oninput="updateAgeDisplay(); evaluateLogic(); evaluateTenure();">
+                    <div class="flex justify-between text-xs text-slate-400 mt-3 font-bold px-1">
+                        <span>18</span><span>75</span>
+                    </div>
+                    <p id="warn_age_18_20" class="text-red-600 text-xs mt-3 hidden-section font-medium flex items-start leading-tight"><span class="mr-1">⚠️</span> <span data-i18n="warn_age_18_20"></span></p>
+                    <p id="warn_age_65_plus" class="text-red-600 text-xs mt-3 hidden-section font-medium flex items-start leading-tight"><span class="mr-1">⚠️</span> <span data-i18n="warn_age_65_plus"></span></p>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm md:text-base font-medium mb-3" data-i18n="q3_label">Bureau Score of Applicant?</label>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+                        <label class="cursor-pointer relative"><input type="radio" name="q_bureau" value="above750" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800"><span class="text-2xl mb-1">🌟</span><span class="text-xs font-semibold" data-i18n="q3_opt1">Above 750</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="q_bureau" value="650_750" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800"><span class="text-2xl mb-1">📈</span><span class="text-xs font-semibold" data-i18n="q3_opt2">650 - 750</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="q_bureau" value="nohit" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800"><span class="text-2xl mb-1">🆕</span><span class="text-xs font-semibold" data-i18n="q3_opt3">0 or -1 (No hit)</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="q_bureau" value="below650" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800"><span class="text-2xl mb-1">📉</span><span class="text-xs font-semibold" data-i18n="q3_opt4">Below 650</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="q_bureau" value="dk" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800"><span class="text-2xl mb-1">❓</span><span class="text-xs font-semibold" data-i18n="opt_dk">Don't Know</span></div></label>
+                    </div>
+                    <p id="warn_q3" class="text-red-600 text-xs mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block font-medium mb-2" data-i18n="q_profile_label">Customer profile</label>
+                    <select id="q_profile" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="handleProfileChange()">
+                        <option value="" disabled selected data-i18n="select_option">-- Select --</option>
+                        
+                        <option value="neg_security" data-i18n="q4_opt1">Security agencies</option>
+                        <option value="neg_laundry" data-i18n="q4_opt2">Laundry</option>
+                        <option value="neg_wine" data-i18n="q4_opt3">Wine Shops/Liquor</option>
+                        <option value="neg_finance" data-i18n="q4_opt4">Private Financiers</option>
+                        <option value="neg_politician" data-i18n="q4_opt5">Politicians</option>
+                        <option value="neg_police" data-i18n="q4_opt6">Police below DSP</option>
+                        <option value="neg_recovery" data-i18n="q4_opt7">DSA/Recovery Agent</option>
+                        <option value="neg_bar" data-i18n="q4_opt8">Bar/Dance Bar</option>
+                        <option value="neg_astrologer" data-i18n="q4_opt9">Astrologer</option>
+                        <option value="neg_gambling" data-i18n="q4_opt10">Gambling</option>
+                        
+                        <option value="caut_lawyer" data-i18n="q5_opt1">Lawyers/Legal</option>
+                        <option value="caut_worship" data-i18n="q5_opt2">Houses of Worship</option>
+                        <option value="caut_scrap" data-i18n="q5_opt3">Scrap dealer < 3Cr</option>
+                        <option value="caut_xerox" data-i18n="q5_opt4">Stand-alone Xerox</option>
+                        <option value="caut_beauty" data-i18n="q5_opt5">Beauty Parlors</option>
+                        <option value="caut_taxi" data-i18n="q5_opt6">Taxi Operators</option>
+                        <option value="caut_milk" data-i18n="q5_opt7">Milk Income</option>
+                        
+                        <option value="none" data-i18n="opt_none">None of the Above</option>
+                    </select>
+                    <p id="warn_q_profile_neg" class="text-red-600 text-xs mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+                
+                <div id="profile_followup_container" class="mb-6 hidden-section p-4 bg-yellow-50 border border-yellow-200 rounded-xl fade-in">
+                    <label class="block font-medium mb-3 text-yellow-800" data-i18n="q5_followup_label">Satisfactory prior repayment track record of 25% of proposed EMI in last 2 years?</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="cursor-pointer relative"><input type="radio" name="profile_track" value="yes" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-yellow-300 bg-white rounded-lg p-2 flex justify-center items-center hover:bg-yellow-100 peer-checked:bg-yellow-400 peer-checked:border-yellow-500 peer-checked:font-bold transition-all"><span class="text-sm" data-i18n="opt_yes">Yes</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="profile_track" value="no" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-yellow-300 bg-white rounded-lg p-2 flex justify-center items-center hover:bg-yellow-100 peer-checked:bg-yellow-400 peer-checked:border-yellow-500 peer-checked:font-bold transition-all"><span class="text-sm" data-i18n="opt_no">No</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="profile_track" value="dk" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-yellow-300 bg-white rounded-lg p-2 flex justify-center items-center hover:bg-yellow-100 peer-checked:bg-yellow-400 peer-checked:border-yellow-500 peer-checked:font-bold transition-all"><span class="text-sm" data-i18n="opt_dk">Don't Know</span></div></label>
+                    </div>
+                    <p id="warn_profile_track" class="text-red-600 text-xs mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                    <div class="grid grid-cols-3 gap-2 md:gap-3">
+                        <label class="cursor-pointer relative"><input type="radio" name="profile_track" value="yes" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-yellow-300 bg-white rounded-lg p-2 md:p-3 flex justify-center items-center hover:bg-yellow-100 peer-checked:bg-yellow-400 peer-checked:border-yellow-500 peer-checked:font-bold transition-all"><span class="text-sm" data-i18n="opt_yes">Yes</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="profile_track" value="no" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-yellow-300 bg-white rounded-lg p-2 md:p-3 flex justify-center items-center hover:bg-yellow-100 peer-checked:bg-yellow-400 peer-checked:border-yellow-500 peer-checked:font-bold transition-all"><span class="text-sm" data-i18n="opt_no">No</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="profile_track" value="dk" class="peer sr-only" onchange="evaluateLogic()"><div class="h-full border border-yellow-300 bg-white rounded-lg p-2 md:p-3 flex justify-center items-center hover:bg-yellow-100 peer-checked:bg-yellow-400 peer-checked:border-yellow-500 peer-checked:font-bold transition-all"><span class="text-sm" data-i18n="opt_dk">Don't Know</span></div></label>
+                    </div>
+                    <p id="warn_profile_track" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+
+                <button onclick="nextSection(2)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 md:py-4 px-4 rounded-xl shadow-md transition-colors text-base md:text-lg" data-i18n="btn_next">Next</button>
+            </div>
+
+            <div id="section2" class="form-section hidden-section bg-white rounded-xl shadow-md p-4 sm:p-8 mb-6 fade-in">
+                <h2 class="text-lg font-bold mb-4 border-b pb-2 text-blue-800" data-i18n="sec2_title">Section 2: Profession & Income</h2>
+
+                <div class="mb-6">
+                    <label class="block text-sm md:text-base font-medium mb-3" data-i18n="q6_label">Primary Income Type?</label>
+                    <div class="grid grid-cols-2 gap-2 md:gap-3">
+                        <label class="cursor-pointer relative"><input type="radio" name="q_income" value="bank" class="peer sr-only" onchange="handleIncomeChange()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center justify-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800 transition-all"><span class="text-2xl mb-1">🏦</span><span class="text-xs font-semibold text-center" data-i18n="q6_opt1">Bank Salaried</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="q_income" value="cash" class="peer sr-only" onchange="handleIncomeChange()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center justify-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800 transition-all"><span class="text-2xl mb-1">💵</span><span class="text-xs font-semibold text-center" data-i18n="q6_opt2">Cash Salaried</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="q_income" value="se_norm" class="peer sr-only" onchange="handleIncomeChange()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center justify-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800 transition-all"><span class="text-2xl mb-1">💼</span><span class="text-xs font-semibold text-center" data-i18n="q6_opt_se_norm">Self-Employed (Normal)</span></div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="q_income" value="se_sub" class="peer sr-only" onchange="handleIncomeChange()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center justify-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800 transition-all"><span class="text-2xl mb-1">📊</span><span class="text-xs font-semibold text-center" data-i18n="q6_opt_se_sub">Subjective Cash Flow</span></div></label>
+                        <label class="cursor-pointer relative col-span-2 md:col-span-1"><input type="radio" name="q_income" value="milk" class="peer sr-only" onchange="handleIncomeChange()"><div class="h-full border border-slate-200 rounded-xl p-2 md:p-3 flex flex-col items-center justify-center hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-800 transition-all"><span class="text-2xl mb-1">🐄</span><span class="text-xs font-semibold text-center" data-i18n="q6_opt4">Milk Dairy</span></div></label>
+                    </div>
+                </div>
+
+                <div id="inc_bank_follow" class="mb-5 hidden-section p-4 bg-blue-50 border border-blue-100 rounded-xl fade-in">
+                    <label class="block font-medium mb-3" data-i18n="q6_bank_label">Overall employment vintage?</label>
+                    <div class="grid grid-cols-2 gap-2"><label class="cursor-pointer relative"><input type="radio" name="inc_bank_vint" value="<2" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_bank_opt1">< 2 years</div></label><label class="cursor-pointer relative"><input type="radio" name="inc_bank_vint" value=">=2" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_bank_opt2">>= 2 years</div></label></div>
+                    <p id="warn_q6_bank" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+
+                <div id="inc_vals_bank" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in space-y-4 bg-slate-50">
+                    <div>
+                        <label class="block text-sm font-medium mb-1" data-i18n="q_inc_bank_sal">Net Monthly Salary (excluding arrears)?</label>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_sal" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1" data-i18n="q_inc_bank_bon">Average monthly Fixed Bonus or Performance Incentive?</label>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_bon" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1" data-i18n="q_inc_bank_rent">Monthly Rental or Other Income?</label>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_rent" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    </div>
+                </div>
+
+                <div id="inc_se_follow" class="mb-5 hidden-section p-4 bg-blue-50 border border-blue-100 rounded-xl fade-in">
+                    <label class="block font-medium mb-3" data-i18n="q6_se_norm_label">Overall business vintage?</label>
+                    <div class="grid grid-cols-2 gap-2"><label class="cursor-pointer relative"><input type="radio" name="inc_se_vint" value="<3" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_se_norm_opt1">< 3 years</div></label><label class="cursor-pointer relative"><input type="radio" name="inc_se_vint" value=">=3" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_se_norm_opt2">>= 3 years</div></label></div>
+                    <p id="warn_q6_se_norm" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+
+                <div id="inc_vals_se_norm" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in space-y-4 bg-slate-50">
+                    <div>
+                        <label class="block text-sm font-medium mb-1" data-i18n="q_inc_se_ebitda">Annual EBITDA (Profit Before Tax + Depreciation + Interest + Salary)?</label>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_se_ebitda" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1" data-i18n="q_inc_se_rent">Annual Rental or Other Income?</label>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_se_rent" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    </div>
+                </div>
+
+                <div id="inc_cash_follow" class="mb-5 hidden-section p-4 bg-blue-50 border border-blue-100 rounded-xl fade-in">
+                    <label class="block font-medium mb-3" data-i18n="q6_cash_label">Overall employment vintage?</label>
+                    <div class="grid grid-cols-2 gap-2 mb-2"><label class="cursor-pointer relative"><input type="radio" name="inc_cash_vint" value="<5" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_cash_opt1">< 5 years</div></label><label class="cursor-pointer relative"><input type="radio" name="inc_cash_vint" value=">=5" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_cash_opt2">>= 5 years</div></label></div>
+                    <p id="warn_q6_cash1" class="text-red-600 text-xs md:text-sm mb-4 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+
+                <div id="inc_vals_cash" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in space-y-4 bg-slate-50">
+                    <div>
+                        <label class="block text-sm font-medium mb-1" data-i18n="q_inc_cash_1">Applicant's declared Net Monthly Cash Salary?</label>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_cash_1" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1" data-i18n="q_inc_cash_2">Co-applicant monthly cash salary (if any)?</label>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_cash_2" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    </div>
+                </div>
+
+                <div id="inc_vals_se_sub" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in bg-slate-50">
+                    <label class="block text-sm font-medium mb-1" data-i18n="q_inc_sub_cf">Assessed Net Monthly Cash Flow?</label>
+                    <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_sub_cf" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                </div>
+
+                <div id="inc_milk_follow" class="mb-5 hidden-section p-4 bg-blue-50 border border-blue-100 rounded-xl fade-in">
+                    <label class="block font-medium mb-3" data-i18n="q6_milk_label">How many cattle does the customer have?</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="cursor-pointer relative"><input type="radio" name="inc_milk_catt" value="<10" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_milk_opt1">Less than 10</div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="inc_milk_catt" value=">=10" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-blue-200 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-500 peer-checked:text-white transition-all" data-i18n="q6_milk_opt2">10 or more</div></label>
+                    </div>
+                    <p id="warn_inc_milk" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+                
+                <div id="inc_vals_milk" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in bg-slate-50">
+                    <label class="block text-sm font-medium mb-1" data-i18n="q_inc_milk_sales">Verified monthly income from milk sales?</label>
+                    <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_milk_sales" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                </div>
+
+                <div class="border-t border-slate-200 my-6"></div>
+
+                <div class="mb-6" id="fin_container"></div>
+
+                <div class="mb-6 fade-in">
+                    <label class="block text-sm md:text-base font-medium mb-1" data-i18n="q_emi">What is the total amount of existing monthly EMI obligations?</label>
+                    <p class="text-xs md:text-sm text-slate-500 mb-3 leading-tight" data-i18n="q_emi_help">Include all term loan EMIs, average interest on OD/CC, and 5% of outstanding credit card bills > Rs 1 Lakh. Exclude loans running off within 12 months.</p>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 font-medium">₹</span>
+                        <input type="text" inputmode="numeric" id="emi_val" class="w-full border border-slate-300 rounded-md py-3 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mt-6">
+                    <button onclick="prevSection(1)" class="w-1/3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-3 md:py-4 px-4 rounded-xl transition-colors text-base md:text-lg" data-i18n="btn_back">Back</button>
+                    <button onclick="nextSection(3)" class="w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 md:py-4 px-4 rounded-xl shadow-md transition-colors text-base md:text-lg" data-i18n="btn_next">Next</button>
+                </div>
+            </div>
+
+            <div id="section3" class="form-section hidden-section bg-white rounded-xl shadow-md p-4 sm:p-8 mb-6 fade-in">
+                <h2 class="text-lg font-bold mb-4 border-b pb-2 text-blue-800" data-i18n="sec3_title">Section 3: Property Assessment</h2>
+
+                <div class="mb-5">
+                    <label class="block font-medium mb-2" data-i18n="lbl_prop_state">State where property is located?</label>
+                    <select id="prop_state" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="handleStateChange()">
+                        <option value="" disabled selected data-i18n="select_option">-- Select --</option>
+                        <option value="mh" data-i18n="state_mh">Maharashtra</option>
+                        <option value="mp" data-i18n="state_mp">Madhya Pradesh</option>
+                        <option value="ap_ts" data-i18n="state_ap_ts">Andhra Pradesh / Telangana</option>
+                    </select>
+                </div>
+
+                <div class="mb-5 hidden-section" id="city_container">
+                    <label class="block font-medium mb-2" data-i18n="lbl_prop_city">City?</label>
+                    <select id="prop_city" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="populatePropertyCategories(); evaluateTenure();">
+                    </select>
+                </div>
+
+                <div class="mb-5 hidden-section" id="cat_container">
+                    <label class="block font-medium mb-2" data-i18n="q7_label">What is the category of the property?</label>
+                    <select id="prop_category" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="handleCategoryChange()">
+                        <option value="" disabled selected data-i18n="select_option">-- Select --</option>
+                        </select>
+                    <p id="warn_cat" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_patta_gp"></span></p>
+                </div>
+
+                <div id="prop_followups" class="mb-6 space-y-4"></div>
+
+                <div class="mb-6">
+                    <label class="block font-medium mb-2" data-i18n="lbl_hazards">Restricted usages or locational hazards?</label>
+                    <select id="prop_hazards" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="evaluateLogic()">
+                        <option value="" disabled selected data-i18n="select_option">-- Select --</option>
+                        <option value="none" data-i18n="haz_none">None of the above (Safe)</option>
+                        <option value="rej_Heavy Industry" data-i18n="haz_heavy">Heavy Industry</option>
+                        <option value="rej_Situated in Malls (Excluding Ground Floor)" data-i18n="haz_mall">Situated in Malls (Excl Ground Floor)</option>
+                        <option value="rej_Cinema Hall / Multiplex" data-i18n="haz_cinema">Cinema Hall / Multiplex</option>
+                        <option value="rej_Religious Purpose" data-i18n="haz_religion">Religious Purpose</option>
+                        <option value="rej_Resorts, Bars, Clubs, or Banquet Halls" data-i18n="haz_resort">Resorts, Bars, Clubs, or Banquet Halls</option>
+                        <option value="rej_Farmhouse" data-i18n="haz_farm">Farmhouse</option>
+                        <option value="rej_Demolition List" data-i18n="haz_demo">Demolition List</option>
+                        <option value="rej_Heritage Property" data-i18n="haz_heritage">Heritage Property</option>
+                        <option value="rej_Basement Property" data-i18n="haz_base">Basement Property</option>
+                        <option value="rej_Chawl or Pagdi Property" data-i18n="haz_chawl">Chawl or Pagdi Property</option>
+                        <option value="rej_Landlocked Property" data-i18n="haz_landlock">Landlocked Property (No access)</option>
+                        <option value="rej_Near Burial Grounds / Graveyards" data-i18n="haz_burial">Near Burial Grounds / Crematoriums</option>
+                        <option value="rej_Near Railway Line or Drainage" data-i18n="haz_rail">Near Railway Line or Drainage</option>
+                        <option value="rej_Buffer areas" data-i18n="haz_buffer">Buffer areas (Waterbodies, CRZ, SEZ)</option>
+                        <option value="rej_Community Dominated / Negative Area" data-i18n="haz_comm">Community Dominated / Negative Area</option>
+                        <option value="rej_NPA Property" data-i18n="haz_npa">NPA Property Purchase</option>
+                        <option value="rej_Unsettled legal disputes" data-i18n="haz_dispute">Properties with unsettled legal disputes</option>
+                        <option value="rej_Long-term tenant" data-i18n="haz_tenant">Long-term tenant occupied</option>
+                    </select>
+                    <p id="warn_hazards" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                </div>
+
+                <div class="mb-6 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label class="block font-medium mb-3" data-i18n="lbl_fsi">Does the structure exhibit FSI/FAR deviations?</label>
+                    <div class="grid grid-cols-2 gap-2 md:gap-3 mb-3">
+                        <label class="cursor-pointer relative"><input type="radio" name="prop_fsi" value="yes" class="peer sr-only" onchange="handleFSIChange()"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-slate-700 peer-checked:text-white" data-i18n="opt_yes">Yes</div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="prop_fsi" value="no" class="peer sr-only" onchange="handleFSIChange()"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-slate-700 peer-checked:text-white" data-i18n="opt_no">No</div></label>
+                    </div>
+                    <div id="fsi_followups" class="space-y-3 hidden-section border-t border-slate-200 pt-3">
+                        <div>
+                            <label class="block text-sm mb-2" data-i18n="fsi_age_lbl">Is the property minimum 5 years old?</label>
+                            <div class="flex gap-4">
+                                <label class="cursor-pointer relative"><input type="radio" name="fsi_age" value="yes" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-slate-200 bg-white rounded-lg text-center text-xs font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4" data-i18n="opt_yes">Yes</div></label>
+                                <label class="cursor-pointer relative"><input type="radio" name="fsi_age" value="no" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-slate-200 bg-white rounded-lg text-center text-xs font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4" data-i18n="opt_no">No</div></label>
+                            </div>
+                            <p id="warn_fsi_age" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                        </div>
+                        <div id="fsi_g2_container" class="hidden-section">
+                            <label class="block text-sm mb-2" data-i18n="fsi_g2_lbl">Is construction restricted to G+2 structure?</label>
+                            <div class="flex gap-4">
+                                <label class="cursor-pointer relative"><input type="radio" name="fsi_g2" value="yes" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-slate-200 bg-white rounded-lg text-center text-xs font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4" data-i18n="opt_yes">Yes</div></label>
+                                <label class="cursor-pointer relative"><input type="radio" name="fsi_g2" value="no" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-slate-200 bg-white rounded-lg text-center text-xs font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4" data-i18n="opt_no">No</div></label>
+                            </div>
+                            <p id="warn_fsi_g2" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="text-lg font-bold mb-4 mt-8 border-b pb-2 text-blue-800" data-i18n="sec_loan_title">Proposed Loan Details</h2>
+                
+                <div class="mb-5">
+                    <label class="block font-medium mb-2" data-i18n="q9_label">What type of loan is required?</label>
+                    <div class="flex gap-4">
+                        <label class="cursor-pointer relative"><input type="radio" name="doc_loan_type" value="hl" onchange="handleLoanTypeChange()" class="peer sr-only"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-600 peer-checked:text-white px-4 transition-all" data-i18n="q9_opt1">Home Loan</div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="doc_loan_type" value="lap" onchange="handleLoanTypeChange()" class="peer sr-only"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-blue-600 peer-checked:text-white px-4 transition-all" data-i18n="q9_opt2">LAP</div></label>
+                    </div>
+                    <p id="warn_gk_hl" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_gk_hl">Funding against GramKantham properties is strictly restricted to LAP transactions only. Home Loans are not allowed.</span></p>
+                </div>
+
+                <div class="mb-5 hidden-section" id="trans_container">
+                    <label class="block font-medium mb-2" data-i18n="lbl_trans">Nature of Transaction?</label>
+                    <select id="doc_trans" class="w-full border border-slate-300 rounded-md p-3 outline-none bg-white" onchange="handleTransChange()"></select>
+                    <p id="warn_gk_construction" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_gk_construction">GramKantham funding is restricted to Complete Properties (Land + Structure) only.</span></p>
+                </div>
+
+                <div class="mb-5 fade-in">
+                    <label class="block font-medium mb-2" data-i18n="q_mv">What is the Estimated Market Value (MV) of the property?</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 font-medium">₹</span>
+                        <input type="text" inputmode="numeric" id="doc_mv" class="w-full border border-slate-300 rounded-md py-3 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all" oninput="formatCurrencyInput(this)" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="mb-5 hidden-section fade-in" id="cop_container">
+                    <label class="block font-medium mb-2" data-i18n="q_cop">What is the Agreement Value / Cost of Property (COP)?</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 font-medium">₹</span>
+                        <input type="text" inputmode="numeric" id="doc_cop" class="w-full border border-slate-300 rounded-md py-3 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all" oninput="formatCurrencyInput(this)" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="mb-5 hidden-section fade-in" id="const_cost_container">
+                    <label class="block font-medium mb-2" data-i18n="q_const_cost">What is the total estimated cost of construction/renovation?</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 font-medium">₹</span>
+                        <input type="text" inputmode="numeric" id="doc_const_cost" class="w-full border border-slate-300 rounded-md py-3 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all" oninput="formatCurrencyInput(this)" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6 mt-6">
+                    <div>
+                        <label class="block font-medium mb-2" data-i18n="q_loan_amt">What is the requested Loan Amount?</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 font-medium">₹</span>
+                            <input type="text" inputmode="numeric" id="loan_amt" class="w-full border border-slate-300 rounded-md py-3 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0">
+                        </div>
+                        <p id="warn_loan_min" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_loan_min">Minimum loan amount is Rs. 5 Lakhs.</span></p>
+                        <p id="warn_loan_max" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_loan_max">Requested loan exceeds max policy cap.</span></p>
+                        <p id="warn_gk_loan_cap_inline" class="text-amber-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_gk_loan_cap">GramKantham maximum loan amount is strictly capped at ₹20 Lakhs.</span></p>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-2" data-i18n="q_loan_tenure">Requested Loan Tenure (in months)?</label>
+                        <input type="text" inputmode="numeric" id="loan_tenure" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="e.g. 120" oninput="this.value = this.value.replace(/[^0-9]/g, ''); evaluateTenure()">
+                        <p id="warn_tenure_cap" class="text-amber-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start leading-tight"></p>
+                        <p id="warn_gk_tenure_cap_inline" class="text-amber-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_gk_tenure_cap">GramKantham tenure strictly capped at 120 months (10 years).</span></p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mt-6">
+                    <button onclick="prevSection(2)" class="w-1/3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-3 md:py-4 px-4 rounded-xl transition-colors text-base md:text-lg" data-i18n="btn_back">Back</button>
+                    <button onclick="calculateEligibility()" class="w-2/3 bg-green-600 hover:bg-green-700 text-white font-bold py-3 md:py-4 px-4 rounded-xl shadow-md transition-colors text-base md:text-lg" data-i18n="btn_calc">Calculate Eligibility</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="evalContainer" class="hidden-section fade-in mb-6">
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 sm:p-8 shadow-xl border border-slate-700 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl">🎯</div>
+                <h2 class="text-xl font-bold mb-5 border-b border-slate-700 pb-3 flex items-center">
+                    <span class="mr-2">📊</span> <span data-i18n="eval_title">Lead Evaluation</span>
+                    <span id="evalTierBadge" class="ml-auto text-xs py-1 px-3 rounded-full font-bold uppercase tracking-wider shadow-sm"></span>
+                </h2>
+                
+                <div class="mb-5">
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-slate-300 font-medium" data-i18n="eval_score">Cumulative Score</span>
+                        <span id="evalScoreText" class="font-bold text-lg text-white"></span>
+                    </div>
+                    <div class="w-full bg-slate-700 rounded-full h-3 shadow-inner overflow-hidden">
+                        <div id="evalScoreBar" class="h-3 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-slate-800/80 p-4 rounded-lg border border-slate-700 shadow-sm text-center">
+                        <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1 font-bold" data-i18n="elig_inc">Income Eligibility</p>
+                        <p class="font-bold text-lg text-green-400" id="valIncElig">₹0</p>
+                    </div>
+                    <div class="bg-slate-800/80 p-4 rounded-lg border border-slate-700 shadow-sm text-center">
+                        <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1 font-bold" data-i18n="elig_prop">Property Eligibility (LTV)</p>
+                        <p class="font-bold text-lg text-blue-400" id="valPropElig">₹0</p>
+                    </div>
+                    <div class="bg-slate-700 p-4 rounded-lg border border-slate-600 shadow-sm text-center">
+                        <p class="text-[10px] text-slate-300 uppercase tracking-wider mb-1 font-bold" data-i18n="elig_final">Final Eligible Amount</p>
+                        <p class="font-black text-2xl text-white" id="valFinalElig">₹0</p>
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1 font-bold" data-i18n="eval_profile">Profile Summary</p>
+                    <p id="profileSummary" class="font-medium text-slate-100 leading-snug"></p>
+                </div>
+                
+                <div class="mb-5">
+                    <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1 font-bold" data-i18n="eval_action">Recommended Action</p>
+                    <div id="evalActionText" class="font-medium text-blue-100 bg-slate-800/80 p-3 rounded-lg border border-slate-700 shadow-sm text-sm"></div>
+                </div>
+
+                <div id="evalWarningsContainer" class="hidden-section mb-5">
+                    <p class="text-[10px] text-red-400 uppercase tracking-wider mb-1 font-bold" data-i18n="res_reject_reason_plural">Policy Alerts / Alternatives Required</p>
+                    <ul id="evalWarningsList" class="list-disc pl-5 text-sm text-red-300 space-y-1 font-medium"></ul>
+                </div>
+
+                <div class="flex gap-3 mt-6 relative z-10">
+                    <button onclick="resetApp()" class="px-4 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold text-sm transition-colors text-white" data-i18n="btn_edit">Edit Application</button>
+                    <button id="btnProceedStep2" onclick="showStep2()" class="flex-1 bg-green-500 hover:bg-green-600 text-white rounded-lg font-bold py-3 shadow-md transition-colors hidden-section" data-i18n="btn_proceed">Proceed to Document Checklist ➔</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="phase2Container" class="hidden-section fade-in">
+            <div class="bg-white rounded-xl shadow-md p-4 sm:p-8 mb-6">
+                <h2 class="text-lg font-bold mb-4 border-b pb-2 text-blue-800" data-i18n="sec4_title">Section 4: Administrative Questionnaire</h2>
+                
+                <div class="mb-5">
+                    <label class="block font-medium mb-2" data-i18n="lbl_const">Constitution of Applicant?</label>
+                    <select id="doc_const" class="w-full border border-slate-300 rounded-md p-3 outline-none bg-white">
+                        <option value="" disabled selected data-i18n="select_option">-- Select --</option>
+                        <option value="ind" data-i18n="c_ind">Individual</option>
+                        <option value="prop" data-i18n="c_prop">Proprietorship</option>
+                        <option value="part" data-i18n="c_part">Partnership Firm</option>
+                        <option value="llp" data-i18n="c_llp">LLP</option>
+                        <option value="pvt" data-i18n="c_pvt">Private Limited Company</option>
+                        <option value="opc" data-i18n="c_opc">One Person Company</option>
+                        <option value="rej_huf" data-i18n="c_huf">HUF / Trust / Society (Not Allowed)</option>
+                    </select>
+                </div>
+
+                <div class="mb-5 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label class="block font-medium mb-3" data-i18n="lbl_rented">Is the property currently rented out?</label>
+                    <div class="flex gap-4 mb-3">
+                        <label class="cursor-pointer relative"><input type="radio" name="doc_rented" value="yes" onchange="handleRentedChange()" class="peer sr-only"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4 transition-all" data-i18n="opt_yes">Yes</div></label>
+                        <label class="cursor-pointer relative"><input type="radio" name="doc_rented" value="no" onchange="handleRentedChange()" class="peer sr-only"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4 transition-all" data-i18n="opt_no">No</div></label>
+                    </div>
+                    <div id="rented_followup" class="hidden-section">
+                        <label class="block text-sm mb-2" data-i18n="lbl_tenants">How many tenants?</label>
+                        <select id="doc_tenants" class="w-full border border-slate-300 rounded-md p-2 outline-none bg-white">
+                            <option value="1_5" data-i18n="t_15">1 to 5 Tenants</option>
+                            <option value="gt5" data-i18n="t_gt5">More than 5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+                    <div>
+                        <label class="block font-medium mb-3" data-i18n="lbl_guar">Will a Guarantor be added?</label>
+                        <div class="flex gap-4">
+                            <label class="cursor-pointer relative"><input type="radio" name="doc_guarantor" value="yes" class="peer sr-only"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4 transition-all" data-i18n="opt_yes">Yes</div></label>
+                            <label class="cursor-pointer relative"><input type="radio" name="doc_guarantor" value="no" checked class="peer sr-only"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4 transition-all" data-i18n="opt_no">No</div></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex gap-4">
+                    <div class="w-1/3">
+                        <button onclick="goBackToPhase1()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-3 md:py-4 px-4 rounded-xl transition-colors text-base md:text-lg flex justify-center items-center" data-i18n="btn_recalc_elig">
+                            ← <span class="hidden sm:inline ml-2" data-i18n="btn_recalc_elig">Re-calculate Eligibility</span>
+                        </button>
+                    </div>
+                    <div class="w-2/3 relative group">
+                        <button id="btnGenerateChecklist" onclick="generateChecklist()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 md:py-4 px-4 rounded-xl shadow-md transition-colors text-base md:text-lg opacity-50 cursor-not-allowed">
+                            <span data-i18n="btn_gen_check">Generate Disbursal Checklist</span> 📋
+                        </button>
+                        <div id="checklistTooltip" class="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-3 rounded shadow-lg whitespace-nowrap opacity-0 transition-opacity pointer-events-none z-10" data-i18n="tt_clear_haz">
+                            Please clear all hazards first
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="checklistContainer" class="hidden-section fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-4 sm:p-8 border-t-8 border-green-600">
+                <h1 class="text-2xl font-black mb-6 text-slate-800 flex items-center border-b pb-4">
+                    <span class="mr-3 text-3xl">📋</span> <span data-i18n="chk_title">Comprehensive Document Checklist</span>
+                </h1>
+
+                <div id="chk_errors" class="hidden-section mb-6 bg-red-50 border border-red-200 p-4 rounded-xl text-red-800 font-medium"></div>
+
+                <div id="chk_content" class="space-y-6">
+                    <div>
+                        <h3 class="font-bold text-slate-800 bg-slate-100 px-3 py-2 rounded uppercase text-sm tracking-wider mb-3" data-i18n="chk_h1">1. Base KYC & Financials</h3>
+                        <ul id="list_base" class="list-disc pl-5 space-y-2 text-slate-700 text-sm font-medium"></ul>
+                    </div>
+                    <div id="block_const" class="hidden-section">
+                        <h3 class="font-bold text-slate-800 bg-slate-100 px-3 py-2 rounded uppercase text-sm tracking-wider mb-3" data-i18n="chk_h2">2. Constitution Documents</h3>
+                        <ul id="list_const" class="list-disc pl-5 space-y-2 text-slate-700 text-sm font-medium"></ul>
+                    </div>
+                    <div id="block_trans" class="hidden-section">
+                        <h3 class="font-bold text-slate-800 bg-slate-100 px-3 py-2 rounded uppercase text-sm tracking-wider mb-3" data-i18n="chk_h3">3. Transaction specific Documents</h3>
+                        <ul id="list_trans" class="list-disc pl-5 space-y-2 text-slate-700 text-sm font-medium"></ul>
+                    </div>
+                    <div id="block_prop" class="hidden-section">
+                        <h3 class="font-bold text-slate-800 bg-slate-100 px-3 py-2 rounded uppercase text-sm tracking-wider mb-3" data-i18n="chk_h4">4. Regional Property Documents</h3>
+                        <ul id="list_prop" class="list-disc pl-5 space-y-2 text-slate-700 text-sm font-medium"></ul>
+                    </div>
+                    <div id="block_add" class="hidden-section">
+                        <h3 class="font-bold text-slate-800 bg-slate-100 px-3 py-2 rounded uppercase text-sm tracking-wider mb-3" data-i18n="chk_h5">5. Additional Requirements</h3>
+                        <ul id="list_add" class="list-disc pl-5 space-y-2 text-slate-700 text-sm font-medium"></ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-200 flex justify-center">
+                    <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl shadow mr-4" data-i18n="btn_print">🖨️ Print Checklist</button>
+                    <button onclick="resetApp()" class="border-2 border-slate-300 hover:bg-slate-50 text-slate-700 font-bold px-6 py-3 rounded-xl" data-i18n="btn_new">Start New App</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <script src="js/i18n.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
