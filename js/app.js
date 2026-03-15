@@ -215,6 +215,8 @@ function nextSection(num) {
     document.getElementById('progressBar').className =
         `absolute top-1/2 left-0 h-1 bg-blue-600 -z-10 transform -translate-y-1/2 transition-all duration-500 ${widthClass}`;
     document.getElementById('navStep1').className = 'flex flex-col items-center bg-slate-50 px-2';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function prevSection(num) {
@@ -225,6 +227,8 @@ function prevSection(num) {
     const widthClass = num === 1 ? 'w-1/3' : num === 2 ? 'w-2/3' : 'w-full';
     document.getElementById('progressBar').className =
         `absolute top-1/2 left-0 h-1 bg-blue-600 -z-10 transform -translate-y-1/2 transition-all duration-500 ${widthClass}`;
+        
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* ── Tenure evaluation ───────────────────────────────────────────── */
@@ -705,6 +709,8 @@ function calculateEligibility() {
 function renderEvalCard(isRejected) {
     sections.forEach(s => s.classList.add('hidden-section'));
     toggle('evalContainer', true);
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const bar = document.getElementById('evalScoreBar');
     const txt = document.getElementById('evalScoreText');
@@ -761,6 +767,20 @@ function showStep2() {
     document.getElementById('navStep2').classList.remove('opacity-50');
     document.getElementById('navStep2Icon').className = 'w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mb-1';
     document.getElementById('navStep2Text').className = 'text-xs font-bold text-blue-800';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goBackToPhase1() {
+    toggle('phase2Container', false);
+    toggle('evalContainer', true);
+
+    document.getElementById('progressBar').style.width = ''; 
+    document.getElementById('navStep2').classList.add('opacity-50');
+    document.getElementById('navStep2Icon').className = 'w-8 h-8 rounded-full bg-slate-300 text-slate-600 font-bold flex items-center justify-center mb-1';
+    document.getElementById('navStep2Text').className = 'text-xs font-bold text-slate-600';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function handleLoanTypeChange() {
@@ -820,6 +840,8 @@ function generateChecklist() {
     toggle('phase2Container', false);
     toggle('checklistContainer', true);
     toggle('progressContainer', false);
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     // Bug fix #4: Reset all blocks to hidden before re-populating
     toggle('block_const', false);
