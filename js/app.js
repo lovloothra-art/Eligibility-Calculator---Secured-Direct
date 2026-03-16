@@ -778,7 +778,6 @@ function showStep2() {
     toggle('phase2Container', true);
 
     document.getElementById('progressBar').style.width = '100%';
-    document.getElementById('navStep2').classList.remove('opacity-50');
     document.getElementById('navStep2Icon').className = 'w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mb-1';
     document.getElementById('navStep2Text').className = 'text-xs font-bold text-blue-800';
     
@@ -790,7 +789,6 @@ function goBackToPhase1() {
     toggle('evalContainer', true);
 
     document.getElementById('progressBar').style.width = ''; 
-    document.getElementById('navStep2').classList.add('opacity-50');
     document.getElementById('navStep2Icon').className = 'w-8 h-8 rounded-full bg-slate-300 text-slate-600 font-bold flex items-center justify-center mb-1';
     document.getElementById('navStep2Text').className = 'text-xs font-bold text-slate-600';
     
