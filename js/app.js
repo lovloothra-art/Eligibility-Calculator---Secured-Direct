@@ -307,6 +307,10 @@ function evaluateLogic() {
     toggleWarn('warn_q6_bank', val('inc_bank_vint') === '<2');
     toggleWarn('warn_q6_se_norm', val('inc_se_vint') === '<3');
     toggleWarn('warn_q6_cash1', val('inc_cash_vint') === '<5');
+    
+    // Warn if Milk Dairy is selected out and other income is missing
+    const isMilk = val('q_income') === 'milk';
+    toggleWarn('warn_milk_other', isMilk && getNumVal('inc_milk_other') === 0 && (val('inc_milk_other') !== '' || getNumVal('inc_milk_sales') > 0));
     toggleWarn('warn_inc_milk', val('inc_milk_catt') === '<10');
 
     const lAmt = getNumVal('loan_amt');
@@ -567,7 +571,7 @@ function calculateEligibility() {
     } else if (incType === 'milk') {
         if (val('inc_milk_catt') === '<10') stateData.rejectReasons.push("rej_milk_catt");
         else { stateData.score += 5; stateData.summaryParts.push("sum_milk_dairy"); }
-        eligible_inc = getNumVal('inc_milk_sales');
+        eligible_inc = getNumVal('inc_milk_sales') + getNumVal('inc_milk_other');
     }
 
     const cat = val('prop_category');
@@ -640,7 +644,17 @@ function calculateEligibility() {
     }
 
     // FINANCIAL CALCULATIONS
-    const emi = getNumVal('emi_val');
+    let emi = getNumVal('emi_val');
+    const trans = val('doc_trans');
+    let triggerBtAssumption = false;
+    
+    if (emi > 0 && (trans === 'hl_bt' || trans === 'lap_bt' || trans === 'lap_topup')) {
+        emi = 0;
+        triggerBtAssumption = true;
+    }
+    
+    toggle('evalAssumptionContainer', triggerBtAssumption);
+
     const reqAmt = getNumVal('loan_amt');
 
     let foir = 0.60;
@@ -665,7 +679,7 @@ function calculateEligibility() {
     const mv = getNumVal('doc_mv');
     const cop = getNumVal('doc_cop');
     let baseVal = mv;
-    const trans = val('doc_trans');
+    // `trans` is already defined above
     if (trans === 'hl_builder' || trans === 'hl_resale') {
         if (cop > 0) baseVal = Math.min(mv, cop);
     }

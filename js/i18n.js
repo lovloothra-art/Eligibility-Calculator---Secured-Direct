@@ -19,7 +19,7 @@ window.i18n = {
                 q5_opt1: "Lawyers/Legal", q5_opt2: "Houses of Worship", q5_opt3: "Scrap dealer < 3Cr", q5_opt4: "Stand-alone Xerox", q5_opt5: "Beauty Parlors", q5_opt6: "Taxi Operators", q5_opt7: "Milk Income",
                 q5_followup_label: "Satisfactory prior repayment track record of 25% of proposed EMI in last 2 years?",
                 
-                q6_label: "Primary Income Type?", q6_opt1: "Bank Salaried", q6_opt2: "Cash Salaried", q6_opt3: "Self-Employed", q6_opt4: "Milk Dairy", q6_opt_se_norm: "Self-Employed (Normal)", q6_opt_se_sub: "Subjective Cash Flow",
+                q6_label: "Primary Income Type?", q6_opt1: "Bank Salaried", q6_opt2: "Cash Salaried", q6_opt3: "Self-Employed", q6_opt4: "Milk Dairy (with other income)", q6_opt_se_norm: "Self-Employed (Normal)", q6_opt_se_sub: "Subjective Cash Flow",
                 q6_bank_label: "Overall employment vintage?", q6_bank_opt1: "< 2 years", q6_bank_opt2: ">= 2 years",
                 q6_se_norm_label: "Overall business vintage?", q6_se_norm_opt1: "< 3 years", q6_se_norm_opt2: ">= 3 years",
                 q6_cash_label: "Overall employment vintage?", q6_cash_opt1: "< 5 years", q6_cash_opt2: ">= 5 years",
@@ -34,7 +34,9 @@ window.i18n = {
                 q_inc_cash_1: "Applicant's declared Net Monthly Cash Salary?",
                 q_inc_cash_2: "Co-applicant monthly cash salary (if any)?",
                 q_inc_sub_cf: "Assessed Net Monthly Cash Flow?",
-                q_inc_milk_sales: "Verified monthly income from milk sales?",
+                q_inc_milk_sales: "Monthly income from milk sales?",
+                q_inc_milk_other: "Monthly income from other sources?",
+                warn_milk_other: "Warning: Milk Dairy income must be supported by an additional source of income.",
                 
                 q_emi_val: "What is the total amount of existing monthly EMI obligations?",
                 q_emi_help: "Include all term loan EMIs, average interest on OD/CC, and 5% of outstanding credit card bills > Rs 1 Lakh. Exclude loans running off within 12 months.",
@@ -81,7 +83,7 @@ window.i18n = {
                 chk_title: "Comprehensive Document Checklist", chk_h1: "1. Base KYC & Financials", chk_h2: "2. Constitution Documents", chk_h3: "3. Transaction specific Documents", chk_h4: "4. Regional Property Documents", chk_h5: "5. Additional Requirements",
                 
                 sum_high_bureau: "High Bureau", sum_med_bureau: "Medium Bureau", sum_no_bureau: "No Bureau History", sum_low_bureau: "Low Bureau", 
-                sum_bank_salaried: "Bank Salaried", sum_self_emp: "Self-Employed", sum_sub_cash: "Subjective Cash Flow", sum_cash_salaried: "Cash Salaried", sum_milk_dairy: "Milk Dairy", 
+                sum_bank_salaried: "Bank Salaried", sum_self_emp: "Self-Employed", sum_sub_cash: "Subjective Cash Flow", sum_cash_salaried: "Cash Salaried", sum_milk_dairy: "Milk Dairy (with other income)", 
                 sum_std_prop: "Standard Property", sum_gp_prop: "Gram Panchayat/Gaothan", sum_unapp_prop: "Unapproved/Notarized Property", sum_excl_prop: "Excluded Property", sum_incomplete: "Incomplete Profile",
                 
                 // Warnings/Rejections
