@@ -438,7 +438,7 @@
                 
                 <div class="mb-5">
                     <label class="block font-medium mb-2" data-i18n="lbl_const">Constitution of Applicant?</label>
-                    <select id="doc_const" class="w-full border border-slate-300 rounded-md p-3 outline-none bg-white">
+                    <select id="doc_const" class="w-full border border-slate-300 rounded-md p-3 outline-none bg-white" onchange="validateAdminSection()">
                         <option value="" disabled selected data-i18n="select_option">-- Select --</option>
                         <option value="ind" data-i18n="c_ind">Individual</option>
                         <option value="prop" data-i18n="c_prop">Proprietorship</option>

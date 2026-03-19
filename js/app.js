@@ -781,6 +781,7 @@ function showStep2() {
     document.getElementById('navStep2Icon').className = 'w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mb-1';
     document.getElementById('navStep2Text').className = 'text-xs font-bold text-blue-800';
     
+    validateAdminSection();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -828,6 +829,30 @@ function handleTransChange() {
 
 function handleRentedChange() {
     toggle('rented_followup', val('doc_rented') === 'yes');
+    validateAdminSection();
+}
+
+function validateAdminSection() {
+    const btn = document.getElementById('btnGenerateChecklist');
+    const tt = document.getElementById('checklistTooltip');
+    const cnst = val('doc_const');
+    const rented = val('doc_rented');
+    
+    // Check if we have any active hazards that should block checklist generation
+    const haz = val('prop_hazards');
+    const hasHazard = haz && haz.startsWith('rej_');
+    
+    if (cnst && rented && !hasHazard) {
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+        tt.style.opacity = '0';
+    } else {
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+        if (hasHazard) {
+            tt.style.opacity = '1';
+        } else {
+            tt.style.opacity = '0';
+        }
+    }
 }
 
 /* ── Checklist generation ────────────────────────────────────────── */
