@@ -969,6 +969,16 @@ function generateChecklist() {
 
 /* ── Reset ────────────────────────────────────────────────────────── */
 
+function editApp() {
+    toggle('evalContainer', false);
+    toggle('phase2Container', false);
+    toggle('checklistContainer', false);
+    toggle('progressContainer', true);
+    
+    // Show section 3
+    prevSection(3);
+}
+
 function resetApp() {
     location.reload();
 }
