@@ -26,3 +26,19 @@ input[type=range]::-webkit-slider-runnable-track {
     background: #e2e8f0;
     border-radius: 4px;
 }
+
+@media print {
+    body { background-color: white !important; }
+    header, #progressContainer, .flex.gap-4, .mt-8.pt-6, #checklistTooltip { display: none !important; }
+    main { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+    .bg-white { shadow: none !important; border: none !important; }
+    .rounded-xl { border-radius: 0 !important; }
+    #checklistContainer { display: block !important; padding: 0 !important; margin: 0 !important; }
+    .print-only { display: block !important; }
+    .no-print { display: none !important; }
+    
+    /* Ensure colors print correctly if possible */
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+}
+
+.print-only { display: none; }

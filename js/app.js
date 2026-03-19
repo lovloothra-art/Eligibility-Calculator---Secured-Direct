@@ -852,6 +852,33 @@ function generateChecklist() {
     toggle('phase2Container', false);
     toggle('checklistContainer', true);
     toggle('progressContainer', false);
+
+    // Populate print-only summary
+    document.getElementById('printFinalElig').innerText = formatCurrency(stateData.finalEligible);
+    document.getElementById('printProfileSummary').innerText = stateData.summaryParts.length > 0 ? 
+        stateData.summaryParts.map(k => getTranslation(k)).join(", ") : getTranslation('sum_incomplete');
+    
+    const printTier = document.getElementById('printTier');
+    printTier.innerText = getTranslation(stateData.tierKey);
+    printTier.className = "text-sm font-bold uppercase tracking-wider " + 
+        (stateData.tierKey === 'tier_4' ? 'text-red-600' : 
+         stateData.tierKey === 'tier_1' ? 'text-green-600' : 
+         stateData.tierKey === 'tier_2' ? 'text-blue-600' : 'text-orange-600');
+
+    const printWarnList = document.getElementById('printWarningsList');
+    if (stateData.rejectReasons.length > 0) {
+        toggle('printWarningsContainer', true);
+        printWarnList.innerHTML = stateData.rejectReasons.map(k => {
+            let txt = getTranslation(k);
+            if (k === 'warn_tenure_capped') {
+                const { finalCap, maturityAge } = computeTenureCap();
+                txt = txt.replace('{X}', finalCap).replace('{Y}', maturityAge);
+            }
+            return `<li>${txt}</li>`;
+        }).join('');
+    } else {
+        toggle('printWarningsContainer', false);
+    }
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
