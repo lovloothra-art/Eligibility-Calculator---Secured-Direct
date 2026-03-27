@@ -45,8 +45,8 @@ window.i18n = {
                 warn_loan_min: "Minimum loan amount is Rs. 5 Lakhs.",
                 warn_loan_max: "Requested loan exceeds maximum policy cap for this property type/location.",
                 
-                lbl_prop_state: "State where property is located?", state_mh: "Maharashtra", state_mp: "Madhya Pradesh", state_ap_ts: "Andhra Pradesh / Telangana",
-                lbl_prop_city: "City?", q7_label: "What is the category of the property?",
+                lbl_prop_state: "State where property is located?", state_mh: "Maharashtra", state_mp: "Madhya Pradesh", state_ap: "Andhra Pradesh", state_ts: "Telangana",
+                lbl_prop_city: "Location of the property?", q7_label: "What is the category of the property?",
                 cat_std: "Standard Property (Fully Approved/Clear Title/NA)", cat_gp: "Gram Panchayat", cat_gaothan: "Gaothan", cat_gunthewari: "Gunthewari", cat_rzone: "R Zone", cat_np: "Nagar Palika / Parishad", cat_patta_dt: "Patta - Drone or Tahsildar", cat_patta_gp: "Patta - Gram Panchayat (Not Funded)", cat_gk: "GramKantham", cat_single: "Single Deed Properties", cat_add_floor: "Additional Floor Funding", cat_unapp: "Unapproved Layout", cat_nota: "Notarized Sale Deed",
                 warn_patta_gp: "Gram Panchayat Pattas are not funded.",
                 
@@ -73,7 +73,7 @@ window.i18n = {
                 eval_title: "Lead Evaluation", eval_score: "Cumulative Score", eval_profile: "Profile Summary", eval_action: "Recommended Action",
                 elig_inc: "Income Eligibility", elig_prop: "Property Eligibility (LTV)", elig_final: "Final Eligible Amount",
                 
-                tier_1: "Tier 1 - Hot Lead", tier_2: "Tier 2 - Warm Lead", tier_3: "Tier 3 - High-Touch", tier_4: "Tier 4 - Alternatives Required",
+                tier_1: "Gold", tier_2: "Silver", tier_3: "Bronze", tier_4: "NA",
                 action_1: "Fast-track application. Eligible for max loan amounts and LTVs.",
                 action_2: "Standard processing. Ensure mandatory norms are documented.",
                 action_3: "Proceed with caution. Intensive PD & approvals required.",
@@ -116,7 +116,7 @@ window.i18n = {
                 warn_gk_hl: "Funding against GramKantham properties is strictly restricted to LAP transactions only. Home Loans are not allowed.", warn_gk_construction: "GramKantham funding is restricted to Complete Properties (Land + Structure) only.",
                 warn_gk_tenure_cap: "GramKantham tenure strictly capped at 120 months (10 years).", warn_gk_loan_cap: "GramKantham maximum loan amount is strictly capped at ₹20 Lakhs.",
                 
-                Mumbai: "Mumbai", Pune: "Pune", Nagpur: "Nagpur", Nashik: "Nashik", Kolhapur: "Kolhapur", Jalgaon: "Jalgaon", Dhule: "Dhule", Aurangabad: "Aurangabad", Ahmednagar: "Ahmednagar", Amravati: "Amravati", "Rest of Maharashtra": "Rest of Maharashtra", Indore: "Indore", Bhopal: "Bhopal", Dewas: "Dewas", Ujjain: "Ujjain", "Rest of Madhya Pradesh": "Rest of Madhya Pradesh",
+                Ahmednagar: "Ahmednagar", Akola: "Akola", Ambajogai: "Ambajogai", Amravati: "Amravati", Aurangabad: "Aurangabad", Baramati: "Baramati", Beed: "Beed", Bhandara: "Bhandara", Bhiwandi: "Bhiwandi", Bhusawal: "Bhusawal", Boisar: "Boisar", Borivali: "Borivali", Chalisgaon: "Chalisgaon", Chandrapur: "Chandrapur", Daryapur: "Daryapur", Dharashiv: "Dharashiv", Dhule: "Dhule", Gondia: "Gondia", Hinganghat: "Hinganghat", Ichalkaranji: "Ichalkaranji", Jalgaon: "Jalgaon", Jalna: "Jalna", Kalyan: "Kalyan", Karad: "Karad", Kharadi: "Kharadi", Kolhapur: "Kolhapur", Kopargaon: "Kopargaon", Latur: "Latur", Malegaon: "Malegaon", Morshi: "Morshi", Nagpur: "Nagpur", Nanded: "Nanded", Nandurbar: "Nandurbar", Nashik: "Nashik", Niphad: "Niphad", Osmanabad: "Osmanabad", Pachora: "Pachora", Panvel: "Panvel", Parbhani: "Parbhani", PCMC: "PCMC", Pusad: "Pusad", Sangamner: "Sangamner", Sangli: "Sangli", Satara: "Satara", Shahada: "Shahada", Shirpur: "Shirpur", Shirur: "Shirur", Shivajinagar: "Shivajinagar", Shrigonda: "Shrigonda", Sinnar: "Sinnar", Solapur: "Solapur", Virar: "Virar", Wardha: "Wardha", Washim: "Washim", Yavatmal: "Yavatmal", Mumbai: "Mumbai", Pune: "Pune", "Rest of Maharashtra": "Rest of Maharashtra", Bhopal: "Bhopal", Dewas: "Dewas", Indore: "Indore", Ujjain: "Ujjain", "Rest of Madhya Pradesh": "Rest of Madhya Pradesh", Eluru: "Eluru", Kakinada: "Kakinada", Rajahmundry: "Rajahmundry", Vijaywada: "Vijaywada", Vishakapatnam: "Vishakapatnam", "Rest of Andhra Pradesh": "Rest of Andhra Pradesh", Ameerpet: "Ameerpet", "BHEL/Chandan Nagar": "BHEL/Chandan Nagar", Hanumkonda: "Hanumkonda", Karimnagar: "Karimnagar", Khammam: "Khammam", "LB Nagar": "LB Nagar", Nizamabad: "Nizamabad", Secunderabad: "Secunderabad", Tarnaka: "Tarnaka", "Rest of Telangana": "Rest of Telangana", search_loc: "Type to search...",
                 
                 doc_base_1: "KYC documents (PAN, Aadhar/Address proof) with OSV stamp and self-attestation.", doc_base_2: "Latest 6 months primary bank account statements.", doc_base_3: "Latest Property tax receipt and Electricity Bill.",
                 doc_const_1: "Partnership Deed", doc_const_2: "NOC from remaining stakeholders", doc_const_3: "Beneficial Owner declaration (15% controlling interest)", doc_const_4: "MOA & AOA", doc_const_5: "CA certified latest shareholding pattern", doc_const_6: "Board Resolution", doc_const_7: "ROC Search Report", doc_const_8: "Beneficial Owner declaration (10% controlling interest)",
@@ -164,8 +164,8 @@ window.i18n = {
                 warn_loan_max: "अनुरोधित ऋण इस संपत्ति प्रकार/स्थान के लिए अधिकतम नीति सीमा से अधिक है।",
                 q_mv: "संपत्ति का अनुमानित बाजार मूल्य (MV) क्या है?", q_cop: "समझौता मूल्य / संपत्ति की लागत (COP) क्या है?", q_const_cost: "निर्माण/नवीनीकरण की कुल अनुमानित लागत क्या है?",
                 
-                lbl_prop_state: "संपत्ति किस राज्य में है?", state_mh: "महाराष्ट्र", state_mp: "मध्य प्रदेश", state_ap_ts: "आंध्र प्रदेश / तेलंगाना",
-                lbl_prop_city: "शहर?", q7_label: "संपत्ति की श्रेणी क्या है?",
+                lbl_prop_state: "संपत्ति किस राज्य में है?", state_mh: "महाराष्ट्र", state_mp: "मध्य प्रदेश", state_ap: "आंध्र प्रदेश", state_ts: "तेलंगाना",
+                lbl_prop_city: "संपत्ति का स्थान?", q7_label: "संपत्ति की श्रेणी क्या है?",
                 cat_std: "मानक संपत्ति", cat_gp: "ग्राम पंचायत", cat_gaothan: "गांवठाण", cat_gunthewari: "गुंठेवारी", cat_rzone: "R Zone", cat_np: "नगर पालिका / परिषद", cat_patta_dt: "पट्टा - ड्रोन या तहसीलदार", cat_patta_gp: "पट्टा - ग्राम पंचायत", cat_gk: "ग्रामकांठम", cat_single: "सिंगल डीड संपत्तियां", cat_add_floor: "अतिरिक्त मंजिल", cat_unapp: "अस्वीकृत लेआउट", cat_nota: "नोटरीकृत बिक्री विलेख",
                 warn_patta_gp: "ग्राम पंचायत पट्टा वित्त पोषित नहीं हैं।",
                 lbl_hazards: "प्रतिबंधित उपयोग या खतरा?", haz_none: "इनमें से कोई नहीं (सुरक्षित)",
@@ -181,7 +181,7 @@ window.i18n = {
                 btn_calc: "पात्रता की गणना करें", btn_edit: "आवेदन संपादित करें", btn_proceed: "दस्तावेज़ चेकलिस्ट पर जाएं ➔", btn_gen: "चेकलिस्ट उत्पन्न करें", btn_print: "🖨️ चेकलिस्ट प्रिंट करें", btn_new: "नया आवेदन", btn_next: "अगला", btn_back: "पीछे",
                 eval_title: "लीड मूल्यांकन", eval_score: "संचयी स्कोर", eval_profile: "प्रोफ़ाइल सारांश", eval_action: "अनुशंसित कार्रवाई",
                 elig_inc: "आय पात्रता", elig_prop: "संपत्ति पात्रता (LTV)", elig_final: "अंतिम योग्य राशि",
-                tier_1: "टियर 1 - हॉट लीड", tier_2: "टियर 2 - वार्म लीड", tier_3: "टियर 3 - हाई-टच", tier_4: "टियर 4 - विकल्प आवश्यक",
+                tier_1: "Gold", tier_2: "Silver", tier_3: "Bronze", tier_4: "NA",
                 action_1: "फ़ास्ट-ट्रैक आवेदन। अधिकतम ऋण राशि, उच्चतम LTV और सबसे लंबी अवधि के लिए पात्र।",
                 action_2: "मानक प्रसंस्करण। सुनिश्चित करें कि सभी अनिवार्य बैंकिंग और विंटेज मानदंड पूरी तरह से प्रलेखित हैं।",
                 action_3: "सावधानी से आगे बढ़ें। व्यावसायिक स्थानों पर गहन भौतिक व्यक्तिगत चर्चा (PD) और पर्यवेक्षक के अनुमोदन की आवश्यकता है।",
@@ -219,7 +219,7 @@ window.i18n = {
                 warn_gk_hl: "ग्रामकांठम संपत्तियों के लिए केवल LAP लेनदेन की अनुमति है। होम लोन की अनुमति नहीं है।", warn_gk_construction: "ग्रामकांठम में केवल पूर्ण संपत्तियों (भूमि + संरचना) को ही वित्त पोषित किया जा सकता है।",
                 warn_gk_tenure_cap: "ग्रामकांठम अवधि 120 महीने (10 वर्ष) तक सख्ती से सीमित है।", warn_gk_loan_cap: "ग्रामकांठम अधिकतम ऋण राशि ₹20 लाख तक सख्ती से सीमित है।",
                 
-                Mumbai: "मुंबई", Pune: "पुणे", Nagpur: "नागपुर", Nashik: "नासिक", Kolhapur: "कोल्हापुर", Jalgaon: "जलगांव", Dhule: "धुले", Aurangabad: "औरंगाबाद", Ahmednagar: "अहमदनगर", Amravati: "अमरावती", "Rest of Maharashtra": "शेष महाराष्ट्र", Indore: "इंदौर", Bhopal: "भोपाल", Dewas: "देवास", Ujjain: "उज्जैन", "Rest of Madhya Pradesh": "शेष मध्य प्रदेश",
+                Ahmednagar: "अहमदनगर", Akola: "अकोला", Ambajogai: "अंबाजोगाई", Amravati: "अमरावती", Aurangabad: "औरंगाबाद", Baramati: "बारामती", Beed: "बीड", Bhandara: "भंडारा", Bhiwandi: "भिवंडी", Bhusawal: "भुसावल", Boisar: "बोईसर", Borivali: "बोरीवली", Chalisgaon: "चालीसगांव", Chandrapur: "चंद्रपुर", Daryapur: "दर्यापुर", Dharashiv: "धाराशिव", Dhule: "धुले", Gondia: "गोंदिया", Hinganghat: "हिंगणघाट", Ichalkaranji: "इचलकरंजी", Jalgaon: "जलगांव", Jalna: "जालना", Kalyan: "कल्याण", Karad: "कराड", Kharadi: "खराड़ी", Kolhapur: "कोल्हापुर", Kopargaon: "कोपरगांव", Latur: "लातूर", Malegaon: "मालेगांव", Morshi: "मोर्शी", Nagpur: "नागपुर", Nanded: "नांदेड़", Nandurbar: "नंदुरबार", Nashik: "नासिक", Niphad: "निफाड़", Osmanabad: "उस्मानाबाद", Pachora: "पाचोरा", Panvel: "पनवेल", Parbhani: "परभणी", PCMC: "पीसीएमसी", Pusad: "पुसद", Sangamner: "संगमनेर", Sangli: "सांगली", Satara: "सतारा", Shahada: "शहादा", Shirpur: "शिरपुर", Shirur: "शिरूर", Shivajinagar: "शिवाजीनगर", Shrigonda: "श्रीगोंदा", Sinnar: "सिन्नर", Solapur: "सोलापुर", Virar: "विरार", Wardha: "वर्धा", Washim: "वाशिम", Yavatmal: "यवतमाल", Mumbai: "मुंबई", Pune: "पुणे", "Rest of Maharashtra": "शेष महाराष्ट्र", Bhopal: "भोपाल", Dewas: "देवास", Indore: "इंदौर", Ujjain: "उज्जैन", "Rest of Madhya Pradesh": "शेष मध्य प्रदेश", Eluru: "एलुरु", Kakinada: "काकीनाडा", Rajahmundry: "राजमुंदरी", Vijaywada: "विजयवाड़ा", Vishakapatnam: "विशाखापत्तनम", "Rest of Andhra Pradesh": "शेष आंध्र प्रदेश", Ameerpet: "अमीरपेट", "BHEL/Chandan Nagar": "भेल/चंदन नगर", Hanumkonda: "हनमकोंडा", Karimnagar: "करीमनगर", Khammam: "खम्मम", "LB Nagar": "एलबी नगर", Nizamabad: "निजामाबाद", Secunderabad: "सिकंदराबाद", Tarnaka: "तारनाका", "Rest of Telangana": "शेष तेलंगाना", search_loc: "खोजने के लिए टाइप करें...",
                 
                 doc_base_1: "OSV स्टाम्प और स्व-सत्यापन के साथ KYC दस्तावेज (PAN, आधार/पता प्रमाण)।", doc_base_2: "नवीनतम 6 महीने के बैंक खाता विवरण।", doc_base_3: "नवीनतम संपत्ति कर रसीद और बिजली बिल।",
                 doc_const_1: "साझेदारी विलेख (Partnership Deed)", doc_const_2: "शेष हितधारकों से NOC", doc_const_3: "लाभकारी स्वामी की घोषणा (15%)", doc_const_4: "MOA और AOA", doc_const_5: "CA प्रमाणित शेयरधारिता पैटर्न", doc_const_6: "बोर्ड संकल्प", doc_const_7: "ROC खोज रिपोर्ट", doc_const_8: "लाभकारी स्वामी की घोषणा (10%)",
@@ -266,8 +266,8 @@ window.i18n = {
                 warn_loan_min: "కనీస రుణ మొత్తం రూ. 5 లక్షలు.",
                 warn_loan_max: "అభ్యర్థించిన రుణం ఈ ఆస్తి/స్థానం కోసం గరిష్ట పరిమితిని మించిపోయింది.",
                 
-                lbl_prop_state: "ఆస్తి ఏ రాష్ట్రంలో ఉంది?", state_mh: "మహారాష్ట్ర", state_mp: "మధ్యప్రదేశ్", state_ap_ts: "ఆంధ్రప్రదేశ్ / తెలంగాణ",
-                lbl_prop_city: "నగరం?", q7_label: "ఆస్తి వర్గం ఏమిటి?",
+                lbl_prop_state: "ఆస్తి ఏ రాష్ట్రంలో ఉంది?", state_mh: "మహారాష్ట్ర", state_mp: "మధ్యప్రదేశ్", state_ap: "ఆంధ్రప్రదేశ్", state_ts: "తెలంగాణ",
+                lbl_prop_city: "ఆస్తి స్థానం?", q7_label: "ఆస్తి వర్గం ఏమిటి?",
                 cat_std: "ప్రామాణిక ఆస్తి", cat_gp: "గ్రామ పంచాయతీ", cat_gaothan: "గావ్ఠాన్", cat_gunthewari: "గుంటెవారీ", cat_rzone: "R జోన్", cat_np: "నగర పాలిక", cat_patta_dt: "పట్టా - డ్రోన్/తహశీల్దార్", cat_patta_gp: "పట్టా - గ్రామ పంచాయతీ", cat_gk: "గ్రామకంఠం", cat_single: "సింగిల్ డీడ్ ఆస్తులు", cat_add_floor: "అదనపు అంతస్తు", cat_unapp: "ఆమోదించబడని లేఅవుట్", cat_nota: "నోటరీ చేయబడిన సేల్ డీడ్",
                 warn_patta_gp: "గ్రామ పంచాయతీ పట్టాలకు నిధులు ఇవ్వబడవు.",
                 lbl_hazards: "ప్రమాదకర ప్రాంతాలు?", haz_none: "ఏదీ లేదు (సురక్షితం)",
@@ -283,7 +283,7 @@ window.i18n = {
                 btn_calc: "అర్హతను లెక్కించండి", btn_edit: "సవరించండి", btn_proceed: "చెక్‌లిస్ట్‌కు వెళ్లండి ➔", btn_gen: "చెక్‌లిస్ట్ రూపొందించండి", btn_print: "🖨️ ప్రింట్", btn_new: "కొత్త అప్లికేషన్", btn_next: "తరువాత", btn_back: "వెనుకకు",
                 eval_title: "లీడ్ మూల్యాంకనం", eval_score: "స్కోర్", eval_profile: "సారాంశం", eval_action: "చర్య",
                 elig_inc: "ఆదాయ అర్హత", elig_prop: "ఆస్తి అర్హత (LTV)", elig_final: "తుది అర్హత మొత్తం",
-                tier_1: "టైర్ 1", tier_2: "టైర్ 2", tier_3: "టైర్ 3", tier_4: "టైర్ 4 - ప్రత్యామ్నాయాలు అవసరం",
+                tier_1: "Gold", tier_2: "Silver", tier_3: "Bronze", tier_4: "NA",
                 action_1: "ఫాస్ట్-ట్రాక్ అప్లికేషన్.", action_2: "ప్రామాణిక ప్రాసెసింగ్.", action_3: "జాగ్రత్తగా కొనసాగండి.", action_4: "ప్రత్యామ్నాయాలను చర్చించండి.",
                 res_reject_reason_plural: "విధాన హెచ్చరికలు:",
                 chk_title: "డాక్యుమెంట్ చెక్‌లిస్ట్", chk_h1: "1. బేస్ KYC", chk_h2: "2. రాజ్యాంగ పత్రాలు", chk_h3: "3. లావాదేవీ పత్రాలు", chk_h4: "4. ఆస్తి పత్రాలు", chk_h5: "5. అదనపు పత్రాలు",
@@ -317,7 +317,7 @@ window.i18n = {
                 warn_gk_road: "గ్రామకంఠం ఆస్తులకు కనీసం 8 అడుగుల వెడల్పుతో మోటారు రోడ్డు తప్పనిసరి.", warn_gk_ec: "గ్రామకంఠం న్యాయ క్లియరెన్స్ కోసం 13 సంవత్సరాల EC మరియు 13 ఏళ్ల పన్ను రసీదులు లేదా తహశీల్దార్/మండల రెవెన్యూ లెటర్ తప్పనిసరి.",
                 warn_gk_hl: "గ్రామకంఠం ఆస్తులకు LAP లావాదేవీలు మాత్రమే. హోమ్ లోన్‌లు అనుమతించబడవు.", warn_gk_construction: "గ్రామకంఠం నిధులు పూర్తి ఆస్తులకు (భూమి + నిర్మాణం) మాత్రమే.",
                 warn_gk_tenure_cap: "గ్రామకంఠం వ్యవధి 120 నెలలకు (10 సంవత్సరాలు) పరిమితం.", warn_gk_loan_cap: "గ్రామకంఠం గరిష్ట రుణ మొత్తం ₹20 లక్షలకు పరిమితం.",
-                Mumbai: "ముంబై", Pune: "పూణే", Nagpur: "నాగ్‌పూర్", Nashik: "నాసిక్", Kolhapur: "కొల్హాపూర్", Jalgaon: "జలగావ్", Dhule: "ధూలే", Aurangabad: "ఔరంగాబాద్", Ahmednagar: "అహ్మద్‌నగర్", Amravati: "అమరావతి", "Rest of Maharashtra": "మిగిలిన మహారాష్ట్ర", Indore: "ఇండోర్", Bhopal: "భోపాల్", Dewas: "దేవాస్", Ujjain: "ఉజ్జయిని", "Rest of Madhya Pradesh": "మిగిలిన మధ్యప్రదేశ్",
+                Ahmednagar: "అహ్మద్‌నగర్", Akola: "అకోలా", Ambajogai: "అంబాజోగై", Amravati: "అమరావతి", Aurangabad: "ఔరంగాబాద్", Baramati: "బారామతి", Beed: "బీడ్", Bhandara: "భండారా", Bhiwandi: "భివాండి", Bhusawal: "భుసావల్", Boisar: "బోయిసర్", Borivali: "బోరివలి", Chalisgaon: "చాలీస్‌గావ్", Chandrapur: "చంద్రపూర్", Daryapur: "దర్యాపూర్", Dharashiv: "ధారాశివ్", Dhule: "ధూలే", Gondia: "గోండియా", Hinganghat: "హింగన్‌ఘాట్", Ichalkaranji: "ఇచల్‌కరంజి", Jalgaon: "జలగావ్", Jalna: "జాల్నా", Kalyan: "కళ్యాణ్", Karad: "కరాడ్", Kharadi: "ఖరాడీ", Kolhapur: "కొల్హాపూర్", Kopargaon: "కోపర్‌గావ్", Latur: "లాతూర్", Malegaon: "మాలెగావ్", Morshi: "మోర్షీ", Nagpur: "నాగ్‌పూర్", Nanded: "నాందేడ్", Nandurbar: "నందుర్బార్", Nashik: "నాసిక్", Niphad: "నిఫాడ్", Osmanabad: "ఉస్మానాబాద్", Pachora: "పచోరా", Panvel: "పన్వెల్", Parbhani: "పర్భనీ", PCMC: "పిసిఎంసి", Pusad: "పుసాద్", Sangamner: "సంగమ్నేర్", Sangli: "సాంగ్లీ", Satara: "సతారా", Shahada: "షహదా", Shirpur: "షిర్పూర్", Shirur: "షిరూర్", Shivajinagar: "శివాజీనగర్", Shrigonda: "శ్రీగొండ", Sinnar: "సిన్నార్", Solapur: "సోలాపూర్", Virar: "విరార్", Wardha: "వార్ధా", Washim: "వాషిమ్", Yavatmal: "యావత్మాల్", Mumbai: "ముంబై", Pune: "పూణే", "Rest of Maharashtra": "మిగిలిన మహారాష్ట్ర", Bhopal: "భోపాల్", Dewas: "దేవాస్", Indore: "ఇండోర్", Ujjain: "ఉజ్జయిని", "Rest of Madhya Pradesh": "మిగిలిన మధ్యప్రదేశ్", Eluru: "ఏలూరు", Kakinada: "కాకినాడ", Rajahmundry: "రాజమండ్రి", Vijaywada: "విజయవాడ", Vishakapatnam: "విశాఖపట్నం", "Rest of Andhra Pradesh": "మిగిలిన ఆంధ్రప్రదేశ్", Ameerpet: "అమీర్‌పేట్", "BHEL/Chandan Nagar": "భెల్/చందన్ నగర్", Hanumkonda: "హనుమకొండ", Karimnagar: "కరీంనగర్", Khammam: "ఖమ్మం", "LB Nagar": "ఎల్బీ నగర్", Nizamabad: "నిజామాబాద్", Secunderabad: "సికింద్రాబాద్", Tarnaka: "తార్నాక", "Rest of Telangana": "మిగిలిన తెలంగాణ", search_loc: "శోధించడానికి టైప్ చేయండి...",
                 
                 doc_base_1: "KYC పత్రాలు (PAN, ఆధార్/చిరునామా రుజువు) OSV స్టాంప్ మరియు స్వీయ-ధృవీకరణతో.", doc_base_2: "తాజా 6 నెలల ప్రాథమిక బ్యాంక్ ఖాతా స్టేట్‌మెంట్‌లు.", doc_base_3: "తాజా ఆస్తి పన్ను రసీదు మరియు విద్యుత్ బిల్లు.",
                 doc_const_1: "భాగస్వామ్య పత్రం", doc_const_2: "మిగిలిన వాటాదారుల నుండి NOC", doc_const_3: "లాభదాయక యజమాని ప్రకటన (15%)", doc_const_4: "MOA & AOA", doc_const_5: "CA ధృవీకరించిన వాటా నమూనా", doc_const_6: "బోర్డు రిజల్యూషన్", doc_const_7: "ROC శోధన నివేదిక", doc_const_8: "లాభదాయక యజమాని ప్రకటన (10%)",
@@ -365,8 +365,8 @@ window.i18n = {
                 warn_loan_min: "किमान कर्ज रक्कम 5 लाख रुपये आहे.",
                 warn_loan_max: "विनंती केलेले कर्ज या मालमत्ता प्रकार/स्थानासाठी जास्तीत जास्त मर्यादेपेक्षा जास्त आहे.",
                 
-                lbl_prop_state: "मालमत्ता कोणत्या राज्यात आहे?", state_mh: "महाराष्ट्र", state_mp: "मध्य प्रदेश", state_ap_ts: "आंध्र प्रदेश / तेलंगणा",
-                lbl_prop_city: "शहर?", q7_label: "मालमत्तेची श्रेणी काय आहे?",
+                lbl_prop_state: "मालमत्ता कोणत्या राज्यात आहे?", state_mh: "महाराष्ट्र", state_mp: "मध्य प्रदेश", state_ap: "आंध्र प्रदेश", state_ts: "तेलंगणा",
+                lbl_prop_city: "मालमत्तेचे ठिकाण?", q7_label: "मालमत्तेची श्रेणी काय आहे?",
                 cat_std: "प्रमाणित मालमत्ता", cat_gp: "ग्रामपंचायत", cat_gaothan: "गावठाण", cat_gunthewari: "गुंठेवारी", cat_rzone: "R झोन", cat_np: "नगरपालिका", cat_patta_dt: "पट्टा - ड्रोन/तहसीलदार", cat_patta_gp: "पट्टा - ग्रामपंचायत", cat_gk: "ग्रामकंठम", cat_single: "सिंगल डीड मालमत्ता", cat_add_floor: "अतिरिक्त मजला", cat_unapp: "मंजूर नसलेले लेआउट", cat_nota: "नोटरीकृत विक्री करार",
                 warn_patta_gp: "ग्रामपंचायत पट्ट्यांना कर्ज दिले जात नाही.",
                 lbl_hazards: "धोकादायक क्षेत्र?", haz_none: "काहीही नाही (सुरक्षित)",
@@ -382,7 +382,7 @@ window.i18n = {
                 btn_calc: "पात्रता तपासा", btn_edit: "अर्ज संपादित करा", btn_proceed: "चेकलिस्टकडे जा ➔", btn_gen: "चेकलिस्ट तयार करा", btn_print: "🖨️ प्रिंट", btn_new: "नवीन अर्ज", btn_next: "पुढे", btn_back: "मागे",
                 eval_title: "लीड मूल्यांकन", eval_score: "एकूण स्कोअर", eval_profile: "सारांश", eval_action: "कृती",
                 elig_inc: "उत्पन्न पात्रता", elig_prop: "मालमत्ता पात्रता (LTV)", elig_final: "अंतिम पात्र रक्कम",
-                tier_1: "टियर 1", tier_2: "टियर 2", tier_3: "टियर 3", tier_4: "टियर 4 - पर्याय आवश्यक",
+                tier_1: "Gold", tier_2: "Silver", tier_3: "Bronze", tier_4: "NA",
                 action_1: "फास्ट-ट्रॅक अर्ज.", action_2: "प्रमाणित प्रक्रिया.", action_3: "सावधगिरीने पुढे जा.", action_4: "पर्यायांवर चर्चा करा.",
                 res_reject_reason_plural: "धोरण सूचना:",
                 chk_title: "दस्तऐवज चेकलिस्ट", chk_h1: "1. बेस KYC", chk_h2: "2. संविधान दस्तऐवज", chk_h3: "3. व्यवहार दस्तऐवज", chk_h4: "4. मालमत्ता दस्तऐवज", chk_h5: "5. अतिरिक्त दस्तऐवज",
@@ -417,7 +417,7 @@ window.i18n = {
                 warn_gk_hl: "ग्रामकंठम मालमत्तांसाठी केवळ LAP व्यवहारांना परवानगी आहे. गृह कर्ज दिले जात नाही.", warn_gk_construction: "ग्रामकंठम मालमत्तांसाठी केवळ पूर्ण मालमत्ता (जमीन + बांधकाम) निधी दिले जाते.",
                 warn_gk_tenure_cap: "ग्रामकंठम कालावधी 120 महिन्यांपर्यंत (10 वर्षे) मर्यादित.", warn_gk_loan_cap: "ग्रामकंठम कमाल कर्ज रक्कम ₹20 लाख मर्यादित.",
                 
-                Mumbai: "मुंबई", Pune: "पुणे", Nagpur: "नागपूर", Nashik: "नाशिक", Kolhapur: "कोल्हापूर", Jalgaon: "जळगाव", Dhule: "धुळे", Aurangabad: "औरंगाबाद", Ahmednagar: "अहमदनगर", Amravati: "अमरावती", "Rest of Maharashtra": "उर्वरित महाराष्ट्र", Indore: "इंदूर", Bhopal: "भोपाळ", Dewas: "देवास", Ujjain: "उज्जैन", "Rest of Madhya Pradesh": "उर्वरित मध्य प्रदेश",
+                Ahmednagar: "अहमदनगर", Akola: "अकोला", Ambajogai: "अंबाजोगाई", Amravati: "अमरावती", Aurangabad: "औरंगाबाद", Baramati: "बारामती", Beed: "बीड", Bhandara: "भंडारा", Bhiwandi: "भिवंडी", Bhusawal: "भुसावळ", Boisar: "बोईसर", Borivali: "बोरीवली", Chalisgaon: "चाळीसगाव", Chandrapur: "चंद्रपूर", Daryapur: "दर्यापूर", Dharashiv: "धाराशिव", Dhule: "धुळे", Gondia: "गोंदिया", Hinganghat: "हिंगणघाट", Ichalkaranji: "इचलकरंजी", Jalgaon: "जळगाव", Jalna: "जालना", Kalyan: "कल्याण", Karad: "कराड", Kharadi: "खराडी", Kolhapur: "कोल्हापूर", Kopargaon: "कोपरगाव", Latur: "लातूर", Malegaon: "मालेगाव", Morshi: "मोर्शी", Nagpur: "नागपूर", Nanded: "नांदेड", Nandurbar: "नंदुरबार", Nashik: "नाशिक", Niphad: "निफाड", Osmanabad: "उस्मानाबाद", Pachora: "पाचोरा", Panvel: "पनवेल", Parbhani: "परभणी", PCMC: "पिंपरी-चिंचवड", Pusad: "पुसद", Sangamner: "संगमनेर", Sangli: "सांगली", Satara: "सातारा", Shahada: "शहादा", Shirpur: "शिरपूर", Shirur: "शिरूर", Shivajinagar: "शिवाजीनगर", Shrigonda: "श्रीगोंदा", Sinnar: "सिन्नर", Solapur: "सोलापूर", Virar: "विरार", Wardha: "वर्धा", Washim: "वाशिम", Yavatmal: "यवतमाळ", Mumbai: "मुंबई", Pune: "पुणे", "Rest of Maharashtra": "उर्वरित महाराष्ट्र", Bhopal: "भोपाळ", Dewas: "देवास", Indore: "इंदूर", Ujjain: "उज्जैन", "Rest of Madhya Pradesh": "उर्वरित मध्य प्रदेश", Eluru: "एलुरु", Kakinada: "काकीनाडा", Rajahmundry: "राजमुंदरी", Vijaywada: "विजयवाडा", Vishakapatnam: "विशाखापट्टणम", "Rest of Andhra Pradesh": "उर्वरित आंध्र प्रदेश", Ameerpet: "अमीरपेट", "BHEL/Chandan Nagar": "भेल/चंदन नगर", Hanumkonda: "हनमकोंडा", Karimnagar: "करीमनगर", Khammam: "खम्मम", "LB Nagar": "एलबी नगर", Nizamabad: "निजामाबाद", Secunderabad: "सिकंदराबाद", Tarnaka: "तारनाका", "Rest of Telangana": "उर्वरित तेलंगणा", search_loc: "शोधण्यासाठी टाइप करा...",
                 
                 doc_base_1: "OSV स्टॅम्प आणि स्वयं-साक्षांकनासह KYC दस्तऐवज (PAN, आधार/पत्ता पुरावा).", doc_base_2: "मागील ६ महिन्यांचे प्राथमिक बँक खाते स्टेटमेंट.", doc_base_3: "नवीनतम मालमत्ता कर पावती आणि वीज बिल.",
                 doc_const_1: "भागीदारी करार", doc_const_2: "उर्वरित भागधारकांकडून NOC", doc_const_3: "फायदेशीर मालकाची घोषणा (15%)", doc_const_4: "MOA आणि AOA", doc_const_5: "CA प्रमाणित नवीनतम शेअरहोल्डिंग नमुना", doc_const_6: "बोर्ड ठराव", doc_const_7: "ROC शोध अहवाल", doc_const_8: "फायदेशीर मालकाची घोषणा (10%)",

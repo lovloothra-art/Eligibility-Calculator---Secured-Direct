@@ -231,13 +231,13 @@
                         <option value="" disabled selected data-i18n="select_option">-- Select --</option>
                         <option value="mh" data-i18n="state_mh">Maharashtra</option>
                         <option value="mp" data-i18n="state_mp">Madhya Pradesh</option>
-                        <option value="ap_ts" data-i18n="state_ap_ts">Andhra Pradesh / Telangana</option>
-                    </select>
+                        <option value="ap" data-i18n="state_ap">Andhra Pradesh</option>
+                        <option value="ts" data-i18n="state_ts">Telangana</option></select>
                 </div>
 
                 <div class="mb-5 hidden-section" id="city_container">
-                    <label class="block font-medium mb-2" data-i18n="lbl_prop_city">City?</label>
-                    <select id="prop_city" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="populatePropertyCategories(); evaluateTenure();">
+                    <label class="block font-medium mb-2" data-i18n="lbl_prop_city">Location of the property?</label>
+                    <select id="prop_city" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="handleCityChange(); populatePropertyCategories(); evaluateTenure();">
                     </select>
                 </div>
 

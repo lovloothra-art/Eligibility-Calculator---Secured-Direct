@@ -20,10 +20,28 @@ window.APP_CONFIG = {
     tier2Properties: ['cat_gp', 'cat_gaothan', 'cat_gunthewari', 'cat_gk'],
     tier3Properties: ['cat_np', 'cat_patta_dt', 'cat_nota', 'cat_rzone', 'cat_unapp', 'cat_single', 'cat_add_floor'],
 
+    propertyTiers: {
+        Gold: [
+            'Ahmednagar', 'Kopargaon', 'Aurangabad', 'Jalna', 'Chalisgaon', 'Dhule', 'Jalgaon', 'Shahada', 'Kolhapur', 'Sangli', 'Solapur', 'Borivali', 'Kalyan', 'Panvel', 'Virar', 'Akola', 'Amravati', 'Nagpur', 'Yavatmal', 'Nashik', 'Niphad', 'Sinnar', 'Baramati', 'PCMC', 'Shivajinagar',
+            'Bhopal', 'Dewas', 'Indore', 'Ujjain',
+            'Kakinada', 'Rajahmundry', 'Eluru', 'Vijaywada', 'Vishakapatnam',
+            'Ameerpet', 'BHEL/Chandan Nagar', 'LB Nagar', 'Secunderabad', 'Hanumkonda', 'Karimnagar', 'Khammam', 'Nizamabad', 'Tarnaka'
+        ],
+        Silver: [
+            'Ambajogai', 'Beed', 'Latur', 'Nanded', 'Osmanabad', 'Parbhani', 'Shrigonda', 'Bhusawal', 'Nandurbar', 'Pachora', 'Shirpur', 'Ichalkaranji', 'Karad', 'Kharadi', 'Malegaon', 'Sangamner', 'Satara', 'Shirur', 'Bhiwandi', 'Boisar', 'Chandrapur', 'Gondia', 'Wardha'
+        ],
+        Bronze: [
+            'Dharashiv', 'Daryapur', 'Morshi', 'Pusad', 'Washim', 'Bhandara', 'Hinganghat'
+        ]
+    },
+
     cities: {
-        mh: ['Mumbai', 'Pune', 'Nagpur', 'Nashik', 'Kolhapur', 'Jalgaon', 'Dhule', 'Aurangabad', 'Ahmednagar', 'Amravati', 'Rest of Maharashtra'],
-        mp: ['Indore', 'Bhopal', 'Dewas', 'Ujjain', 'Rest of Madhya Pradesh'],
-        ap_ts: []
+        mh: [
+            'Ahmednagar', 'Akola', 'Ambajogai', 'Amravati', 'Aurangabad', 'Baramati', 'Beed', 'Bhandara', 'Bhiwandi', 'Bhusawal', 'Boisar', 'Borivali', 'Chalisgaon', 'Chandrapur', 'Daryapur', 'Dharashiv', 'Dhule', 'Gondia', 'Hinganghat', 'Ichalkaranji', 'Jalgaon', 'Jalna', 'Kalyan', 'Karad', 'Kharadi', 'Kolhapur', 'Kopargaon', 'Latur', 'Malegaon', 'Morshi', 'Nagpur', 'Nanded', 'Nandurbar', 'Nashik', 'Niphad', 'Osmanabad', 'Pachora', 'Panvel', 'Parbhani', 'PCMC', 'Pusad', 'Sangamner', 'Sangli', 'Satara', 'Shahada', 'Shirpur', 'Shirur', 'Shivajinagar', 'Shrigonda', 'Sinnar', 'Solapur', 'Virar', 'Wardha', 'Washim', 'Yavatmal', 'Rest of Maharashtra'
+        ],
+        mp: ['Bhopal', 'Dewas', 'Indore', 'Ujjain', 'Rest of Madhya Pradesh'],
+        ap: ['Eluru', 'Kakinada', 'Rajahmundry', 'Vijaywada', 'Vishakapatnam', 'Rest of Andhra Pradesh'],
+        ts: ['Ameerpet', 'BHEL/Chandan Nagar', 'Hanumkonda', 'Karimnagar', 'Khammam', 'LB Nagar', 'Nizamabad', 'Secunderabad', 'Tarnaka', 'Rest of Telangana']
     },
 
     propCategories: {
@@ -40,7 +58,13 @@ window.APP_CONFIG = {
             { v: 'cat_patta_dt', t: 'Patta - Drone or Tahsildar' },
             { v: 'cat_patta_gp', t: 'Patta - Gram Panchayat (Not Funded)' }
         ],
-        ap_ts: [
+        ap: [
+            { v: 'cat_std', t: 'Standard Property (Fully Approved/Clear Title/NA)' },
+            { v: 'cat_gk', t: 'GramKantham' },
+            { v: 'cat_single', t: 'Single Deed Properties' },
+            { v: 'cat_add_floor', t: 'Additional Floor Funding (Unapproved Floor)' }
+        ],
+        ts: [
             { v: 'cat_std', t: 'Standard Property (Fully Approved/Clear Title/NA)' },
             { v: 'cat_gk', t: 'GramKantham' },
             { v: 'cat_single', t: 'Single Deed Properties' },

@@ -14,7 +14,7 @@
 
 /* ── Aliases for CONFIG ──────────────────────────────────────────── */
 const { negativeProfiles, cautionProfiles, tier1Properties, tier2Properties, tier3Properties,
-        cities, propCategories, transOptions, hazardI18nMap } = window.APP_CONFIG;
+        cities, propCategories, transOptions, hazardI18nMap, propertyTiers } = window.APP_CONFIG;
 
 /* ── Application state ───────────────────────────────────────────── */
 let stateData = {
@@ -28,7 +28,10 @@ let stateData = {
     actionKey: '',
     incEligible: 0,
     propEligible: 0,
-    finalEligible: 0
+    finalEligible: 0,
+    propertyTier: '',
+    propCity: '',
+    propState: ''
 };
 
 /* ── Cached DOM refs ─────────────────────────────────────────────── */
@@ -157,10 +160,19 @@ function changeLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) {
-            if (el.tagName === 'INPUT' && el.type === 'placeholder') { el.placeholder = dict[key]; }
+            if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) { el.placeholder = dict[key]; }
             else { el.innerHTML = dict[key]; }
         } else if (window.i18n['en'][key]) {
             el.innerHTML = window.i18n['en'][key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) {
+            el.placeholder = dict[key];
+        } else if (window.i18n['en'][key]) {
+            el.placeholder = window.i18n['en'][key];
         }
     });
 
@@ -196,6 +208,15 @@ function changeLanguage() {
 
     if (!document.getElementById('checklistContainer').classList.contains('hidden-section')) {
         generateChecklist();
+    }
+
+    // Rebuild searchable dropdowns to sync translations
+    if (typeof setupSearchableDropdown === 'function') {
+        setupSearchableDropdown('q_profile');
+        setupSearchableDropdown('prop_hazards');
+        if (!document.getElementById('city_container').classList.contains('hidden-section')) {
+            setupSearchableDropdown('prop_city');
+        }
     }
 }
 
@@ -384,24 +405,43 @@ function evaluateLogic() {
 function handleStateChange() {
     const st = val('prop_state');
     stateData.propState = st;
-    const citySel = document.getElementById('prop_city');
+    const propCity = document.getElementById('prop_city');
 
-    citySel.innerHTML = `<option value="" disabled selected data-i18n="select_option">${getTranslation('select_option')}</option>`;
+    propCity.innerHTML = '<option value="" disabled selected data-i18n="select_option">' + getTranslation('select_option') + '</option>';
     document.getElementById('prop_followups').innerHTML = '';
 
-    if (st === 'mh' || st === 'mp') {
-        cities[st].forEach(c => citySel.innerHTML += `<option value="${c}" data-i18n="${c}">${getTranslation(c)}</option>`);
+    if (st && cities[st] && cities[st].length > 0) {
+        cities[st].forEach(c => {
+            const translatedC = getTranslation(c);
+            propCity.innerHTML += `<option value="${c}" data-i18n="${c}">${translatedC}</option>`;
+        });
         toggle('city_container', true);
         toggle('cat_container', false);
-    } else if (st === 'ap_ts') {
-        toggle('city_container', false);
-        populatePropertyCategories();
+        
+        // Build the scalable custom dropdown
+        setupSearchableDropdown('prop_city');
     } else {
         toggle('city_container', false);
         toggle('cat_container', false);
     }
 
     evaluateLogic();
+}
+
+
+function handleCityChange() {
+    const c = val('prop_city');
+    stateData.propCity = c;
+    
+    if (propertyTiers.Gold.includes(c)) {
+        stateData.propertyTier = 'Gold';
+    } else if (propertyTiers.Silver.includes(c)) {
+        stateData.propertyTier = 'Silver';
+    } else if (propertyTiers.Bronze.includes(c)) {
+        stateData.propertyTier = 'Bronze';
+    } else {
+        stateData.propertyTier = 'NA';
+    }
 }
 
 function populatePropertyCategories() {
@@ -749,18 +789,18 @@ function renderEvalCard(isRejected) {
         if (s >= 80) {
             stateData.tierKey = 'tier_1';
             stateData.actionKey = 'action_1';
-            badge.className = "ml-auto text-xs py-1 px-3 rounded-full font-bold uppercase shadow-sm bg-green-500 text-white";
-            bar.className = "h-3 rounded-full transition-all duration-1000 ease-out bg-green-500";
+            badge.className = "ml-auto text-xs py-1 px-3 rounded-full font-bold uppercase shadow-sm bg-yellow-500 text-white";
+            bar.className = "h-3 rounded-full transition-all duration-1000 ease-out bg-yellow-500";
         } else if (s >= 50) {
             stateData.tierKey = 'tier_2';
             stateData.actionKey = 'action_2';
-            badge.className = "ml-auto text-xs py-1 px-3 rounded-full font-bold uppercase shadow-sm bg-blue-500 text-white";
-            bar.className = "h-3 rounded-full transition-all duration-1000 ease-out bg-blue-400";
+            badge.className = "ml-auto text-xs py-1 px-3 rounded-full font-bold uppercase shadow-sm bg-slate-400 text-white";
+            bar.className = "h-3 rounded-full transition-all duration-1000 ease-out bg-slate-400";
         } else {
             stateData.tierKey = 'tier_3';
             stateData.actionKey = 'action_3';
-            badge.className = "ml-auto text-xs py-1 px-3 rounded-full font-bold uppercase shadow-sm bg-orange-500 text-white";
-            bar.className = "h-3 rounded-full transition-all duration-1000 ease-out bg-orange-400";
+            badge.className = "ml-auto text-xs py-1 px-3 rounded-full font-bold uppercase shadow-sm bg-amber-600 text-white";
+            bar.className = "h-3 rounded-full transition-all duration-1000 ease-out bg-amber-500";
         }
     }
 
@@ -887,8 +927,8 @@ function generateChecklist() {
     printTier.innerText = getTranslation(stateData.tierKey);
     printTier.className = "text-sm font-bold uppercase tracking-wider " + 
         (stateData.tierKey === 'tier_4' ? 'text-red-600' : 
-         stateData.tierKey === 'tier_1' ? 'text-green-600' : 
-         stateData.tierKey === 'tier_2' ? 'text-blue-600' : 'text-orange-600');
+         stateData.tierKey === 'tier_1' ? 'text-yellow-600' : 
+         stateData.tierKey === 'tier_2' ? 'text-slate-500' : 'text-amber-700');
 
     const printWarnList = document.getElementById('printWarningsList');
     if (stateData.rejectReasons.length > 0) {
@@ -981,6 +1021,130 @@ function editApp() {
 
 function resetApp() {
     location.reload();
+}
+
+/* ── Searchable Dropdown Utility ─────────────────────────────────── */
+function setupSearchableDropdown(selectId) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+
+    // Check if wrapper already exists
+    let wrapper = document.getElementById(selectId + '_wrapper');
+    const dropdownId = selectId + '_dropdown';
+    const searchId = selectId + '_search';
+
+    if (!wrapper) {
+        select.classList.add('hidden'); // Hide the native select
+        select.classList.remove('w-full', 'border', 'border-slate-300', 'rounded-md', 'p-3');
+        
+        wrapper = document.createElement('div');
+        wrapper.id = selectId + '_wrapper';
+        wrapper.className = 'relative w-full cursor-pointer';
+
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.id = searchId;
+        searchInput.className = 'w-full border border-slate-300 rounded-md p-3 pl-10 pr-10 focus:ring-2 focus:ring-blue-500 outline-none bg-white transition-all shadow-sm cursor-text';
+        searchInput.autocomplete = 'off';
+        
+        // Preserve standard input logic but intercept search strings
+        searchInput.setAttribute('data-i18n-placeholder', 'search_loc');
+        searchInput.placeholder = getTranslation('search_loc');
+
+        searchInput.onkeyup = function() {
+            const filter = this.value.toLowerCase();
+            const dropdown = document.getElementById(dropdownId);
+            const options = dropdown.getElementsByClassName('custom-option');
+            dropdown.classList.remove('hidden');
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].innerText.toLowerCase().indexOf(filter) > -1) {
+                    options[i].style.display = "";
+                } else {
+                    options[i].style.display = "none";
+                }
+            }
+        };
+
+        const iconLeft = document.createElement('div');
+        iconLeft.className = 'absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none';
+        iconLeft.innerHTML = '<span class="text-slate-400">🔍</span>';
+
+        const iconRight = document.createElement('div');
+        iconRight.className = 'absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none';
+        iconRight.innerHTML = '<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>';
+
+        const dropdown = document.createElement('div');
+        dropdown.id = dropdownId;
+        dropdown.className = 'absolute z-20 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-xl max-h-60 overflow-y-auto hidden';
+
+        wrapper.appendChild(iconLeft);
+        wrapper.appendChild(searchInput);
+        wrapper.appendChild(iconRight);
+        wrapper.appendChild(dropdown);
+        
+        select.parentNode.insertBefore(wrapper, select);
+        
+        document.addEventListener('click', function(e) {
+            if (!wrapper.contains(e.target) && e.target.id !== searchId) {
+                dropdown.classList.add('hidden');
+            }
+        });
+        
+        searchInput.addEventListener('focus', function() {
+            dropdown.classList.remove('hidden');
+            searchInput.value = ''; // clear input so user can search immediately
+            const options = dropdown.getElementsByClassName('custom-option');
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.display = "";
+            }
+        });
+
+        // Click on input -> open dropdown and reset filter
+        searchInput.addEventListener('click', function() {
+            dropdown.classList.remove('hidden');
+        });
+    }
+
+    const dropdown = document.getElementById(dropdownId);
+    const searchInput = document.getElementById(searchId);
+    dropdown.innerHTML = '';
+    
+    const selectedVal = select.value;
+    
+    // Copy options to custom dropdown
+    Array.from(select.options).forEach(opt => {
+        if (opt.disabled || opt.value === "") return;
+        
+        const div = document.createElement('div');
+        div.className = 'px-4 py-3 hover:bg-blue-50 cursor-pointer text-slate-700 transition-colors border-b border-slate-50 last:border-b-0 custom-option';
+        
+        const i18nKey = opt.getAttribute('data-i18n') || opt.value;
+        const txt = getTranslation(i18nKey);
+        
+        div.innerHTML = `<span class="font-medium">${txt}</span>`;
+        
+        if (opt.value === selectedVal) {
+            div.classList.add('bg-blue-100', 'font-bold');
+            searchInput.value = txt; // Pre-fill with selected
+        }
+        
+        div.onclick = function() {
+            searchInput.value = txt;
+            select.value = opt.value;
+            dropdown.classList.add('hidden');
+            
+            const allOpts = dropdown.querySelectorAll('.custom-option');
+            allOpts.forEach(o => o.classList.remove('bg-blue-100', 'font-bold'));
+            div.classList.add('bg-blue-100', 'font-bold');
+            
+            select.dispatchEvent(new Event('change'));
+        };
+        dropdown.appendChild(div);
+    });
+
+    if (!selectedVal || select.options[select.selectedIndex]?.disabled) {
+        searchInput.value = ''; // Ensure blank query when unselected
+    }
 }
 
 /* ── Initialize ──────────────────────────────────────────────────── */
