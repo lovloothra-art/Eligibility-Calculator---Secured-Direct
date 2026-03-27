@@ -14,7 +14,7 @@
 
 /* ── Aliases for CONFIG ──────────────────────────────────────────── */
 const { negativeProfiles, cautionProfiles, tier1Properties, tier2Properties, tier3Properties,
-        cities, propCategories, transOptions, hazardI18nMap, propertyTiers } = window.APP_CONFIG;
+        cities, propCategories, transOptions, hazardI18nMap, locationTiers } = window.APP_CONFIG;
 
 /* ── Application state ───────────────────────────────────────────── */
 let stateData = {
@@ -29,7 +29,7 @@ let stateData = {
     incEligible: 0,
     propEligible: 0,
     finalEligible: 0,
-    propertyTier: '',
+    locationTier: '',
     propCity: '',
     propState: ''
 };
@@ -92,6 +92,39 @@ const toggle = (id, show) => {
 };
 
 const toggleWarn = (id, show) => toggle(id, show);
+
+/* ── Income calculation helper ───────────────────────────────────── */
+function computeAnnualIncome() {
+    const incType = val('q_income');
+    if (!incType) return 0;
+    
+    if (incType === 'se_norm') {
+        const ebitda = getNumVal('inc_se_ebitda');
+        const rent = getNumVal('inc_se_rent');
+        const cappedRent = Math.min(rent, ebitda * 0.5);
+        return ebitda + cappedRent;
+    }
+    
+    let monthly_inc = 0;
+    if (incType === 'bank') {
+        const sal = getNumVal('inc_bank_sal');
+        const bon = getNumVal('inc_bank_bon');
+        const rent = getNumVal('inc_bank_rent');
+        const cappedRent = Math.min(rent, sal * 0.5);
+        monthly_inc = sal + (bon * 0.5) + cappedRent;
+    } else if (incType === 'se_sub') {
+        monthly_inc = getNumVal('inc_sub_cf');
+    } else if (incType === 'cash') {
+        const c1 = getNumVal('inc_cash_1');
+        const c2 = getNumVal('inc_cash_2');
+        const cap1 = Math.min(c1, 20000);
+        const cap2 = Math.min(c2, 20000);
+        monthly_inc = Math.min(cap1 + cap2, 40000);
+    } else if (incType === 'milk') {
+        monthly_inc = getNumVal('inc_milk_sales') + getNumVal('inc_milk_other');
+    }
+    return monthly_inc * 12;
+}
 
 /**
  * Shared helper to compute tenure cap values.
@@ -194,6 +227,11 @@ function changeLanguage() {
                     const { finalCap, maturityAge } = computeTenureCap();
                     txt = txt.replace('{X}', finalCap).replace('{Y}', maturityAge);
                 }
+                if (k === 'rej_min_income') {
+                    let reqAmtStr = stateData.locationTier === 'Tier1' ? '₹2,00,000' : '₹1,50,000';
+                    let tierName = stateData.locationTier === 'Tier1' ? 'Tier 1' : 'Tier 2/3';
+                    txt = txt.replace('{A}', reqAmtStr).replace('{T}', tierName);
+                }
                 return `<li>${txt}</li>`;
             }).join('');
         }
@@ -218,6 +256,9 @@ function changeLanguage() {
             setupSearchableDropdown('prop_city');
         }
     }
+
+    // Re-evaluate logic to refresh dynamic warning text in the new language
+    evaluateLogic();
 }
 
 /* ── Navigation ──────────────────────────────────────────────────── */
@@ -376,6 +417,57 @@ function evaluateLogic() {
     toggleWarn('warn_fsi_age', val('fsi_age') === 'no');
     toggleWarn('warn_fsi_g2', val('fsi_g2') === 'no');
 
+    // Minimum Income Check
+    // On the income page (Section 2): use Tier 1 threshold by default if no city chosen yet
+    // On the location page (Section 3): use the actual tier threshold once city is selected
+    let annualIncome = computeAnnualIncome();
+    let citySelected = !!val('prop_city');
+    let minTReqAnnual = 200000; // default Tier 1
+    if (citySelected) {
+        if (stateData.locationTier === 'Tier1') {
+            minTReqAnnual = 200000;
+        } else {
+            minTReqAnnual = 150000;
+        }
+    }
+    
+    let showT1Warn = false;
+    let showAllWarn = false;
+    if (val('q_income') && annualIncome > 0) {
+        if (annualIncome < 150000) {
+            showAllWarn = true;   // below ALL tiers — red
+        } else if (annualIncome < 200000) {
+            // Only show amber Tier-1 warning if no city is selected yet OR if a Tier 1 (Gold) city is selected
+            if (!citySelected || stateData.locationTier === 'Tier1') {
+                showT1Warn = true;
+            }
+        }
+    }
+    toggleWarn('warn_min_income_t1', showT1Warn);
+    toggleWarn('warn_min_income_all', showAllWarn);
+
+    // Location page warning — only show when city is selected AND income is below threshold
+    let showLocWarn = false;
+    if (citySelected && val('q_income') && annualIncome > 0 && annualIncome < minTReqAnnual) {
+        showLocWarn = true;
+        // Set the location warning text to the tier-specific message
+        const locTxtEl = document.getElementById('warn_min_income_loc_text');
+        if (locTxtEl) {
+            const key = annualIncome < 150000 ? 'warn_min_income_all' : 'warn_min_income_t1';
+            locTxtEl.textContent = getTranslation(key);
+        }
+        // Color: red if below all tiers, amber if below Tier 1 only
+        const locP = document.getElementById('warn_min_income_loc');
+        if (locP) {
+            if (annualIncome < 150000) {
+                locP.className = locP.className.replace('text-amber-600', 'text-red-600');
+            } else {
+                locP.className = locP.className.replace('text-red-600', 'text-amber-600');
+            }
+        }
+    }
+    toggleWarn('warn_min_income_loc', showLocWarn);
+
     // GramKantham follow-up warnings
     toggleWarn('warn_fup_gk_road', val('fup_gk_road') === 'no');
     toggleWarn('warn_fup_gk_ec', val('fup_gk_ec') === 'no');
@@ -433,15 +525,17 @@ function handleCityChange() {
     const c = val('prop_city');
     stateData.propCity = c;
     
-    if (propertyTiers.Gold.includes(c)) {
-        stateData.propertyTier = 'Gold';
-    } else if (propertyTiers.Silver.includes(c)) {
-        stateData.propertyTier = 'Silver';
-    } else if (propertyTiers.Bronze.includes(c)) {
-        stateData.propertyTier = 'Bronze';
+    if (locationTiers.Tier1.includes(c)) {
+        stateData.locationTier = 'Tier1';
+    } else if (locationTiers.Tier2.includes(c)) {
+        stateData.locationTier = 'Tier2';
+    } else if (locationTiers.Tier3.includes(c)) {
+        stateData.locationTier = 'Tier3';
     } else {
-        stateData.propertyTier = 'NA';
+        stateData.locationTier = 'NA';
     }
+
+    evaluateLogic();
 }
 
 function populatePropertyCategories() {
@@ -753,6 +847,18 @@ function calculateEligibility() {
     if (finalEligible < 500000 && reqAmt >= 500000) stateData.rejectReasons.push("warn_loan_min");
     if (reqAmt > maxCap) stateData.rejectReasons.push("warn_loan_max");
 
+    let annualIncomeLocal = computeAnnualIncome();
+    let minTReqAnnualLocal = 0;
+    if (stateData.locationTier === 'Tier1') {
+        minTReqAnnualLocal = 200000;
+    } else if (stateData.locationTier) {
+        minTReqAnnualLocal = 150000;
+    }
+    
+    if (minTReqAnnualLocal > 0 && annualIncomeLocal < minTReqAnnualLocal) {
+        stateData.rejectReasons.push("rej_min_income");
+    }
+
     if (stateData.rejectReasons.length > 0) isRejected = true;
 
     renderEvalCard(isRejected);
@@ -938,6 +1044,11 @@ function generateChecklist() {
             if (k === 'warn_tenure_capped') {
                 const { finalCap, maturityAge } = computeTenureCap();
                 txt = txt.replace('{X}', finalCap).replace('{Y}', maturityAge);
+            }
+            if (k === 'rej_min_income') {
+                let reqAmtStr = stateData.locationTier === 'Tier1' ? '₹2,00,000' : '₹1,50,000';
+                let tierName = stateData.locationTier === 'Tier1' ? 'Tier 1' : 'Tier 2/3';
+                txt = txt.replace('{A}', reqAmtStr).replace('{T}', tierName);
             }
             return `<li>${txt}</li>`;
         }).join('');

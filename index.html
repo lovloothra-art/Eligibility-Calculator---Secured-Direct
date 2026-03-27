@@ -131,15 +131,15 @@
                 <div id="inc_vals_bank" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in space-y-4 bg-slate-50">
                     <div>
                         <label class="block text-sm font-medium mb-1" data-i18n="q_inc_bank_sal">Net Monthly Salary (excluding arrears)?</label>
-                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_sal" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_sal" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1" data-i18n="q_inc_bank_bon">Average monthly Fixed Bonus or Performance Incentive?</label>
-                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_bon" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_bon" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1" data-i18n="q_inc_bank_rent">Monthly Rental or Other Income?</label>
-                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_rent" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_bank_rent" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                 </div>
 
@@ -152,11 +152,11 @@
                 <div id="inc_vals_se_norm" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in space-y-4 bg-slate-50">
                     <div>
                         <label class="block text-sm font-medium mb-1" data-i18n="q_inc_se_ebitda">Annual EBITDA (Profit Before Tax + Depreciation + Interest + Salary)?</label>
-                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_se_ebitda" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_se_ebitda" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1" data-i18n="q_inc_se_rent">Annual Rental or Other Income?</label>
-                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_se_rent" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_se_rent" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                 </div>
 
@@ -169,17 +169,17 @@
                 <div id="inc_vals_cash" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in space-y-4 bg-slate-50">
                     <div>
                         <label class="block text-sm font-medium mb-1" data-i18n="q_inc_cash_1">Applicant's declared Net Monthly Cash Salary?</label>
-                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_cash_1" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_cash_1" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1" data-i18n="q_inc_cash_2">Co-applicant monthly cash salary (if any)?</label>
-                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_cash_2" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                        <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_cash_2" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                 </div>
 
                 <div id="inc_vals_se_sub" class="mb-5 hidden-section p-4 border border-slate-200 rounded-xl fade-in bg-slate-50">
                     <label class="block text-sm font-medium mb-1" data-i18n="q_inc_sub_cf">Assessed Net Monthly Cash Flow?</label>
-                    <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_sub_cf" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this)" placeholder="0"></div>
+                    <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_sub_cf" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                 </div>
 
                 <div id="inc_milk_follow" class="mb-5 hidden-section p-4 bg-blue-50 border border-blue-100 rounded-xl fade-in">
@@ -201,6 +201,14 @@
                         <div class="relative"><span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span><input type="text" inputmode="numeric" id="inc_milk_other" class="w-full border border-slate-300 rounded-md py-2 pl-8 pr-3 focus:ring-2 focus:ring-blue-500 outline-none" oninput="formatCurrencyInput(this); evaluateLogic()" placeholder="0"></div>
                     </div>
                     <p id="warn_milk_other" class="text-amber-600 text-xs mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_milk_other">Warning: Milk Dairy income must be supported by an additional source of income.</span></p>
+                </div>
+
+                <div class="mb-5 p-4 bg-slate-50 border border-slate-200 rounded-xl" id="min_income_info_container">
+                    <p class="text-sm font-medium text-slate-700 leading-snug" data-i18n="min_income_info">
+                        Minimum Income Required: INR 2 Lakhs annually (INR 16,667/month) for Tier 1 locations, and INR 1.50 Lakhs annually (INR 12,500/month) for all other locations.
+                    </p>
+                    <p id="warn_min_income_t1" class="text-amber-600 text-xs md:text-sm mt-3 hidden-section font-bold flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_min_income_t1">Warning: The inputted income is below the minimum required threshold for Tier 1 locations.</span></p>
+                    <p id="warn_min_income_all" class="text-red-600 text-xs md:text-sm mt-3 hidden-section font-bold flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_min_income_all">Warning: The inputted income is below the minimum required threshold for Tier 1 and all other locations.</span></p>
                 </div>
 
                 <div class="border-t border-slate-200 my-6"></div>
@@ -239,6 +247,7 @@
                     <label class="block font-medium mb-2" data-i18n="lbl_prop_city">Location of the property?</label>
                     <select id="prop_city" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="handleCityChange(); populatePropertyCategories(); evaluateTenure();">
                     </select>
+                    <p id="warn_min_income_loc" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-bold flex items-start"><span class="mr-1">⚠️</span> <span id="warn_min_income_loc_text">Warning: The inputted income is below the minimum required threshold for this location tier.</span></p>
                 </div>
 
                 <div class="mb-5 hidden-section" id="cat_container">

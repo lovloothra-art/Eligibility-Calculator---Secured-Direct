@@ -20,18 +20,18 @@ window.APP_CONFIG = {
     tier2Properties: ['cat_gp', 'cat_gaothan', 'cat_gunthewari', 'cat_gk'],
     tier3Properties: ['cat_np', 'cat_patta_dt', 'cat_nota', 'cat_rzone', 'cat_unapp', 'cat_single', 'cat_add_floor'],
 
-    propertyTiers: {
-        Gold: [
-            'Ahmednagar', 'Kopargaon', 'Aurangabad', 'Jalna', 'Chalisgaon', 'Dhule', 'Jalgaon', 'Shahada', 'Kolhapur', 'Sangli', 'Solapur', 'Borivali', 'Kalyan', 'Panvel', 'Virar', 'Akola', 'Amravati', 'Nagpur', 'Yavatmal', 'Nashik', 'Niphad', 'Sinnar', 'Baramati', 'PCMC', 'Shivajinagar',
-            'Bhopal', 'Dewas', 'Indore', 'Ujjain',
-            'Kakinada', 'Rajahmundry', 'Eluru', 'Vijaywada', 'Vishakapatnam',
-            'Ameerpet', 'BHEL/Chandan Nagar', 'LB Nagar', 'Secunderabad', 'Hanumkonda', 'Karimnagar', 'Khammam', 'Nizamabad', 'Tarnaka'
+    locationTiers: {
+        Tier1: [
+            'Borivali', 'PCMC', 'Shivajinagar', 'Ameerpet', 'BHEL/Chandan Nagar', 'LB Nagar', 'Medchal'
         ],
-        Silver: [
-            'Ambajogai', 'Beed', 'Latur', 'Nanded', 'Osmanabad', 'Parbhani', 'Shrigonda', 'Bhusawal', 'Nandurbar', 'Pachora', 'Shirpur', 'Ichalkaranji', 'Karad', 'Kharadi', 'Malegaon', 'Sangamner', 'Satara', 'Shirur', 'Bhiwandi', 'Boisar', 'Chandrapur', 'Gondia', 'Wardha'
+        Tier2: [
+            'Vijaywada', 'Kalyan', 'Virar', 'Nagpur', 'Nashik', 'Bhopal', 'Indore'
         ],
-        Bronze: [
-            'Dharashiv', 'Daryapur', 'Morshi', 'Pusad', 'Washim', 'Bhandara', 'Hinganghat'
+        Tier3: [
+            'Kakinada', 'Rajahmundry', 'Eluru', 'Vishakapatnam',
+            'Ahmednagar', 'Kopargaon', 'Aurangabad', 'Jalna', 'Chalisgaon', 'Dhule', 'Jalgaon', 'Shahada', 'Kolhapur', 'Sangli', 'Solapur', 'Panvel', 'Akola', 'Amravati', 'Yavatmal', 'Niphad', 'Sinnar', 'Baramati',
+            'Dewas', 'Ujjain',
+            'Karimnagar', 'Warangal'
         ]
     },
 
