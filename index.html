@@ -260,6 +260,19 @@
 
                 <div id="prop_followups" class="mb-6 space-y-4"></div>
 
+                <div class="mb-6 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label class="block font-medium mb-4 flex justify-between items-center">
+                        <span data-i18n="q_prop_age_label">What is the age of the property (in years)?</span>
+                        <span class="text-xl font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-lg border border-blue-200 shadow-sm" id="propAgeDisplay">7 Years</span>
+                    </label>
+                    <input type="range" id="prop_age" min="0" max="50" value="7" oninput="updatePropAgeDisplay(); evaluateLogic(); evaluateTenure();">
+                    <div class="flex justify-between text-xs text-slate-400 mt-3 font-bold px-1">
+                        <span>0</span><span>50</span>
+                    </div>
+                    <p id="warn_prop_age_min_5" class="text-amber-600 text-xs mt-3 hidden-section font-medium flex items-start leading-tight"><span class="mr-1">⚠️</span> <span data-i18n="warn_prop_age_min_5_inline">This specific property type must be a minimum of 5 years old to be considered for funding.</span></p>
+                    <p id="warn_prop_age_max_40" class="text-amber-600 text-xs mt-3 hidden-section font-medium flex items-start leading-tight"><span class="mr-1">⚠️</span> <span data-i18n="warn_prop_age_max_40_inline">Property age should not exceed 40 years at the time of the loan application.</span></p>
+                </div>
+
                 <div class="mb-6">
                     <label class="block font-medium mb-2" data-i18n="lbl_hazards">Restricted usages or locational hazards?</label>
                     <select id="prop_hazards" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white" onchange="evaluateLogic()">
@@ -294,14 +307,6 @@
                         <label class="cursor-pointer relative"><input type="radio" name="prop_fsi" value="no" class="peer sr-only" onchange="handleFSIChange()"><div class="p-2 md:p-3 border border-slate-300 bg-white rounded-lg text-center text-sm font-medium peer-checked:bg-slate-700 peer-checked:text-white" data-i18n="opt_no">No</div></label>
                     </div>
                     <div id="fsi_followups" class="space-y-3 hidden-section border-t border-slate-200 pt-3">
-                        <div>
-                            <label class="block text-sm mb-2" data-i18n="fsi_age_lbl">Is the property minimum 5 years old?</label>
-                            <div class="flex gap-4">
-                                <label class="cursor-pointer relative"><input type="radio" name="fsi_age" value="yes" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-slate-200 bg-white rounded-lg text-center text-xs font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4" data-i18n="opt_yes">Yes</div></label>
-                                <label class="cursor-pointer relative"><input type="radio" name="fsi_age" value="no" class="peer sr-only" onchange="evaluateLogic()"><div class="p-2 border border-slate-200 bg-white rounded-lg text-center text-xs font-medium peer-checked:bg-slate-600 peer-checked:text-white px-4" data-i18n="opt_no">No</div></label>
-                            </div>
-                            <p id="warn_fsi_age" class="text-red-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="inline_warning"></span></p>
-                        </div>
                         <div id="fsi_g2_container" class="hidden-section">
                             <label class="block text-sm mb-2" data-i18n="fsi_g2_lbl">Is construction restricted to G+2 structure?</label>
                             <div class="flex gap-4">
@@ -370,6 +375,7 @@
                         <input type="text" inputmode="numeric" id="loan_tenure" class="w-full border border-slate-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="e.g. 120" oninput="this.value = this.value.replace(/[^0-9]/g, ''); evaluateTenure()">
                         <p id="warn_tenure_cap" class="text-amber-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start leading-tight"></p>
                         <p id="warn_gk_tenure_cap_inline" class="text-amber-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start"><span class="mr-1">⚠️</span> <span data-i18n="warn_gk_tenure_cap">GramKantham tenure strictly capped at 120 months (10 years).</span></p>
+                        <p id="warn_prop_age_max_maturity_50" class="text-amber-600 text-xs md:text-sm mt-2 hidden-section font-medium flex items-start leading-tight"><span class="mr-1">⚠️</span> <span data-i18n="warn_prop_age_max_maturity_50_inline">Property age at loan maturity should not exceed 50 years.</span></p>
                     </div>
                 </div>
 

@@ -184,6 +184,14 @@ function updateAgeDisplay() {
     document.getElementById('ageDisplay').innerText = getTranslation('age_slider_lbl').replace('{V}', valStr);
 }
 
+function updatePropAgeDisplay() {
+    const valStr = document.getElementById('prop_age').value;
+    const propAgeDisplay = document.getElementById('propAgeDisplay');
+    if (propAgeDisplay) {
+        propAgeDisplay.innerText = getTranslation('age_slider_lbl').replace('{V}', valStr);
+    }
+}
+
 /* ── Language ─────────────────────────────────────────────────────── */
 
 function changeLanguage() {
@@ -210,6 +218,7 @@ function changeLanguage() {
     });
 
     updateAgeDisplay();
+    updatePropAgeDisplay();
 
     if (!document.getElementById('evalContainer').classList.contains('hidden-section')) {
         const profileSummary = document.getElementById('profileSummary');
@@ -316,6 +325,18 @@ function evaluateTenure() {
     } else {
         warnEl.classList.add('hidden-section');
     }
+
+    // Rule C: Max Property Age at Maturity (50 years)
+    const propAge = parseInt(document.getElementById('prop_age')?.value) || 0;
+    const projectedAge = propAge + (currentVal / 12);
+    const warnMatEl = document.getElementById('warn_prop_age_max_maturity_50');
+    if (warnMatEl) {
+        if (projectedAge >= 50) {
+            warnMatEl.classList.remove('hidden-section');
+        } else {
+            warnMatEl.classList.add('hidden-section');
+        }
+    }
 }
 
 /* ── Income type handler ─────────────────────────────────────────── */
@@ -393,17 +414,15 @@ function evaluateLogic() {
     toggleWarn('warn_gunt_yr_2', gYr === 'p15');
 
     toggleWarn('warn_fup_un_deed', val('fup_un_deed') === 'no');
-    toggleWarn('warn_fup_un_age', val('fup_un_age') === 'no');
     toggleWarn('warn_fup_un_zone', val('fup_un_zone') === 'no');
 
-    toggleWarn('warn_fup_gp_age', val('fup_gp_age') === 'no');
     toggleWarn('warn_fup_gp_g2', val('fup_gp_g2') === 'no');
 
     toggleWarn('warn_fup_pat_age', val('fup_pat_age') === 'no');
     toggleWarn('warn_fup_pat_size', val('fup_pat_size') === 'no');
 
     toggleWarn('warn_fup_np_tax', val('fup_np_tax') === 'no');
-    toggleWarn('warn_fup_np_age', val('fup_np_age') === 'no');
+    toggleWarn('warn_fup_np_g2', val('fup_np_g2') === 'no');
 
     toggleWarn('warn_fup_nota_mc', val('fup_nota_mc') === 'no');
 
@@ -412,10 +431,16 @@ function evaluateLogic() {
     toggleWarn('warn_ap_deed_2', apDeed === '12_3');
 
     toggleWarn('warn_fup_add_next', val('fup_add_next') === 'no');
-    toggleWarn('warn_fup_add_age', val('fup_add_age') === 'no');
 
-    toggleWarn('warn_fsi_age', val('fsi_age') === 'no');
     toggleWarn('warn_fsi_g2', val('fsi_g2') === 'no');
+
+    // Rule A & B checks
+    const propAge = parseInt(val('prop_age')) || 0;
+    const restrictedCats = ['cat_gp', 'cat_gaothan', 'cat_unapp', 'cat_np', 'cat_nota', 'cat_add_floor'];
+    const isRestrictedType = restrictedCats.includes(val('prop_category')) || val('prop_fsi') === 'yes';
+    
+    toggleWarn('warn_prop_age_min_5', isRestrictedType && propAge < 5);
+    toggleWarn('warn_prop_age_max_40', propAge > 40);
 
     // Minimum Income Check
     // On the income page (Section 2): use Tier 1 threshold by default if no city chosen yet
@@ -588,17 +613,15 @@ function handleCategoryChange() {
         </div>`;
     } else if (cat === 'cat_unapp') {
         html += createQ('fup_un_deed', 'fup_un_deed_lbl');
-        html += createQ('fup_un_age', 'fup_un_age_lbl');
         html += createQ('fup_un_zone', 'fup_un_zone_lbl');
     } else if (cat === 'cat_gp' || cat === 'cat_gaothan') {
-        html += createQ('fup_gp_age', 'fup_gp_age_lbl');
         html += createQ('fup_gp_g2', 'fup_gp_g2_lbl');
     } else if (cat === 'cat_patta_dt') {
         html += createQ('fup_pat_age', 'fup_pat_age_lbl');
         html += createQ('fup_pat_size', 'fup_pat_size_lbl');
     } else if (cat === 'cat_np') {
         html += createQ('fup_np_tax', 'fup_np_tax_lbl');
-        html += createQ('fup_np_age', 'fup_np_age_lbl');
+        html += createQ('fup_np_g2', 'fup_np_g2_lbl');
     } else if (cat === 'cat_nota') {
         html += createQ('fup_nota_mc', 'fup_nota_mc_lbl');
     } else if (cat === 'cat_single') {
@@ -611,7 +634,6 @@ function handleCategoryChange() {
         </div>`;
     } else if (cat === 'cat_add_floor') {
         html += createQ('fup_add_next', 'fup_add_next_lbl');
-        html += createQ('fup_add_age', 'fup_add_age_lbl');
     } else if (cat === 'cat_gk') {
         html += createQ('fup_gk_road', 'fup_gk_road_lbl');
         html += createQ('fup_gk_ec', 'fup_gk_ec_lbl');
@@ -726,11 +748,9 @@ function calculateEligibility() {
     }
     if (cat === 'cat_unapp') {
         if (val('fup_un_deed') === 'no') stateData.rejectReasons.push("warn_un_deed");
-        if (val('fup_un_age') === 'no') stateData.rejectReasons.push("warn_un_age");
         if (val('fup_un_zone') === 'no') stateData.rejectReasons.push("warn_un_zone");
     }
     if (cat === 'cat_gp' || cat === 'cat_gaothan') {
-        if (val('fup_gp_age') === 'no') stateData.rejectReasons.push("warn_gp_age");
         if (val('fup_gp_g2') === 'no') stateData.rejectReasons.push("warn_gp_g2");
     }
     if (cat === 'cat_patta_dt') {
@@ -739,7 +759,7 @@ function calculateEligibility() {
     }
     if (cat === 'cat_np') {
         if (val('fup_np_tax') === 'no') stateData.rejectReasons.push("warn_np_tax");
-        if (val('fup_np_age') === 'no') stateData.rejectReasons.push("warn_np_age");
+        if (val('fup_np_g2') === 'no') stateData.rejectReasons.push("warn_np_g2");
     }
     if (cat === 'cat_nota') {
         if (val('fup_nota_mc') === 'no') stateData.rejectReasons.push("warn_nota_mc");
@@ -751,7 +771,6 @@ function calculateEligibility() {
     }
     if (cat === 'cat_add_floor') {
         if (val('fup_add_next') === 'no') stateData.rejectReasons.push("warn_add_next");
-        if (val('fup_add_age') === 'no') stateData.rejectReasons.push("warn_add_age");
     }
     if (cat === 'cat_gk') {
         if (val('fup_gk_road') === 'no') stateData.rejectReasons.push("warn_gk_road");
@@ -762,11 +781,20 @@ function calculateEligibility() {
     }
 
     if (val('prop_fsi') === 'yes') {
-        if (val('fsi_age') === 'no') stateData.rejectReasons.push("warn_fsi_age");
         if ((val('prop_state') === 'mh' || val('prop_state') === 'mp') && val('fsi_g2') === 'no') {
             stateData.rejectReasons.push("warn_fsi_g2");
         }
     }
+
+    // Property Age Rejections (Rule A, B, C)
+    const propAge = parseInt(val('prop_age')) || 0;
+    const isRestrictedType = ['cat_gp', 'cat_gaothan', 'cat_unapp', 'cat_np', 'cat_nota', 'cat_add_floor'].includes(cat) || val('prop_fsi') === 'yes';
+    
+    if (isRestrictedType && propAge < 5) stateData.rejectReasons.push("rej_prop_age_min_5");
+    if (propAge > 40) stateData.rejectReasons.push("rej_prop_age_max_40");
+    
+    const tenureMonths = parseInt(val('loan_tenure')) || 0;
+    if (propAge + (tenureMonths / 12) >= 50) stateData.rejectReasons.push("rej_prop_age_max_maturity_50");
 
     // Bug fix #3: Use explicit hazard→i18n mapping instead of truncated substring
     const haz = val('prop_hazards');

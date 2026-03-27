@@ -111,7 +111,7 @@ window.i18n = {
                 fup_un_deed_lbl: "Was the latest sale deed executed in Jan 2019 or before?", fup_un_age_lbl: "Is the property at least 5 years old?", fup_un_zone_lbl: "Is the property located in a Residential/Yellow zone?",
                 fup_gp_age_lbl: "Is the property minimum 5 years old?", fup_gp_g2_lbl: "Is the structure an independent house restricted to G+2 floors?",
                 fup_pat_age_lbl: "Is the Patta document at least 3 years old?", fup_pat_size_lbl: "Is the plot size <= 3000 Sq.ft AND minimum 50% construction done?",
-                fup_np_tax_lbl: "Is a 13-year tax ledger of the previous owner available?", fup_np_age_lbl: "Is the property min 5 years old AND restricted to G+2 floors?",
+                fup_np_tax_lbl: "Is a 13-year tax ledger of the previous owner available?", fup_np_g2_lbl: "Is the structure restricted to G+2 floors?",
                 fup_nota_mc_lbl: "Is the property located strictly within Municipal Corporation boundaries?",
                 fup_ap_deed_lbl: "Based on the transaction type, how old is the registered deed?", lt12: "< 12 months", "12_3": "12 months to 3 years", gt3: "> 3 years",
                 fup_add_next_lbl: "Is the funding restricted to the unauthorized floor immediately next to the approved floor?", fup_add_age_lbl: "Is the proposed collateral minimum 5 years old?",
@@ -119,6 +119,14 @@ window.i18n = {
                 warn_gk_road: "A motorable access road with a minimum width of 8 ft is mandatory for GramKantham properties.", warn_gk_ec: "A 13-year EC and 13-year-old tax receipts or a Tahsildar/Mandal revenue letter are strictly required for GramKantham legal clearance.",
                 warn_gk_hl: "Funding against GramKantham properties is strictly restricted to LAP transactions only. Home Loans are not allowed.", warn_gk_construction: "GramKantham funding is restricted to Complete Properties (Land + Structure) only.",
                 warn_gk_tenure_cap: "GramKantham tenure strictly capped at 120 months (10 years).", warn_gk_loan_cap: "GramKantham maximum loan amount is strictly capped at ₹20 Lakhs.",
+                
+                q_prop_age_label: "What is the age of the property (in years)?",
+                warn_prop_age_min_5_inline: "This specific property type must be a minimum of 5 years old to be considered for funding.",
+                warn_prop_age_max_40_inline: "Property age should not exceed 40 years at the time of the loan application.",
+                warn_prop_age_max_maturity_50_inline: "Property age at loan maturity should not exceed 50 years.",
+                rej_prop_age_min_5: "Certain property types must be min 5 years old.",
+                rej_prop_age_max_40: "Property age exceeds the max 40 years at application.",
+                rej_prop_age_max_maturity_50: "Property age at loan maturity exceeds the max 50 years.",
                 
                 Ahmednagar: "Ahmednagar", Akola: "Akola", Ambajogai: "Ambajogai", Amravati: "Amravati", Aurangabad: "Aurangabad", Baramati: "Baramati", Beed: "Beed", Bhandara: "Bhandara", Bhiwandi: "Bhiwandi", Bhusawal: "Bhusawal", Boisar: "Boisar", Borivali: "Borivali", Chalisgaon: "Chalisgaon", Chandrapur: "Chandrapur", Daryapur: "Daryapur", Dharashiv: "Dharashiv", Dhule: "Dhule", Gondia: "Gondia", Hinganghat: "Hinganghat", Ichalkaranji: "Ichalkaranji", Jalgaon: "Jalgaon", Jalna: "Jalna", Kalyan: "Kalyan", Karad: "Karad", Kharadi: "Kharadi", Kolhapur: "Kolhapur", Kopargaon: "Kopargaon", Latur: "Latur", Malegaon: "Malegaon", Morshi: "Morshi", Nagpur: "Nagpur", Nanded: "Nanded", Nandurbar: "Nandurbar", Nashik: "Nashik", Niphad: "Niphad", Osmanabad: "Osmanabad", Pachora: "Pachora", Panvel: "Panvel", Parbhani: "Parbhani", PCMC: "PCMC", Pusad: "Pusad", Sangamner: "Sangamner", Sangli: "Sangli", Satara: "Satara", Shahada: "Shahada", Shirpur: "Shirpur", Shirur: "Shirur", Shivajinagar: "Shivajinagar", Shrigonda: "Shrigonda", Sinnar: "Sinnar", Solapur: "Solapur", Virar: "Virar", Wardha: "Wardha", Washim: "Washim", Yavatmal: "Yavatmal", Mumbai: "Mumbai", Pune: "Pune", "Rest of Maharashtra": "Rest of Maharashtra", Bhopal: "Bhopal", Dewas: "Dewas", Indore: "Indore", Ujjain: "Ujjain", "Rest of Madhya Pradesh": "Rest of Madhya Pradesh", Eluru: "Eluru", Kakinada: "Kakinada", Rajahmundry: "Rajahmundry", Vijaywada: "Vijaywada", Vishakapatnam: "Vishakapatnam", "Rest of Andhra Pradesh": "Rest of Andhra Pradesh", Ameerpet: "Ameerpet", "BHEL/Chandan Nagar": "BHEL/Chandan Nagar", Hanumkonda: "Hanumkonda", Karimnagar: "Karimnagar", Khammam: "Khammam", "LB Nagar": "LB Nagar", Nizamabad: "Nizamabad", Secunderabad: "Secunderabad", Tarnaka: "Tarnaka", "Rest of Telangana": "Rest of Telangana", search_loc: "Type to search...",
                 
@@ -218,7 +226,7 @@ window.i18n = {
                 fup_un_deed_lbl: "क्या नवीनतम बिक्री विलेख जन 2019 से पहले का है?", fup_un_age_lbl: "क्या संपत्ति 5 वर्ष पुरानी है?", fup_un_zone_lbl: "क्या संपत्ति आवासीय/येलो जोन में है?",
                 fup_gp_age_lbl: "क्या संपत्ति कम से कम 5 वर्ष पुरानी है?", fup_gp_g2_lbl: "क्या घर G+2 तक सीमित है?",
                 fup_pat_age_lbl: "क्या पट्टा 3 वर्ष पुराना है?", fup_pat_size_lbl: "क्या प्लॉट <= 3000 वर्ग फुट है?",
-                fup_np_tax_lbl: "क्या 13 वर्ष का टैक्स लेजर उपलब्ध है?", fup_np_age_lbl: "क्या संपत्ति 5 वर्ष पुरानी और G+2 है?",
+                fup_np_tax_lbl: "क्या 13 वर्ष का टैक्स लेजर उपलब्ध है?", fup_np_g2_lbl: "क्या निर्माण G+2 तक सीमित है?",
                 fup_nota_mc_lbl: "क्या संपत्ति नगर निगम के भीतर है?",
                 fup_ap_deed_lbl: "पंजीकृत विलेख कितना पुराना है?", lt12: "< 12 महीने", "12_3": "12 महीने से 3 साल", gt3: "> 3 साल",
                 fup_add_next_lbl: "क्या निर्माण स्वीकृत मंजिल के ठीक बगल में है?", fup_add_age_lbl: "क्या संपार्श्विक 5 वर्ष पुराना है?",
@@ -226,6 +234,14 @@ window.i18n = {
                 warn_gk_road: "ग्रामकांठम संपत्तियों के लिए न्यूनतम 8 फीट चौड़ी मोटर योग्य सड़क अनिवार्य है।", warn_gk_ec: "ग्रामकांठम कानूनी मंजूरी के लिए 13 वर्ष का EC और 13 वर्ष पुरानी कर रसीद या तहसीलदार/मंडल राजस्व पत्र अनिवार्य है।",
                 warn_gk_hl: "ग्रामकांठम संपत्तियों के लिए केवल LAP लेनदेन की अनुमति है। होम लोन की अनुमति नहीं है।", warn_gk_construction: "ग्रामकांठम में केवल पूर्ण संपत्तियों (भूमि + संरचना) को ही वित्त पोषित किया जा सकता है।",
                 warn_gk_tenure_cap: "ग्रामकांठम अवधि 120 महीने (10 वर्ष) तक सख्ती से सीमित है।", warn_gk_loan_cap: "ग्रामकांठम अधिकतम ऋण राशि ₹20 लाख तक सख्ती से सीमित है।",
+                
+                q_prop_age_label: "संपत्ति की आयु (वर्षों में) क्या है?",
+                warn_prop_age_min_5_inline: "फंडिंग के लिए इस विशिष्ट संपत्ति प्रकार का कम से कम 5 वर्ष पुराना होना आवश्यक है।",
+                warn_prop_age_max_40_inline: "ऋण आवेदन के समय संपत्ति की आयु 40 वर्ष से अधिक नहीं होनी चाहिए।",
+                warn_prop_age_max_maturity_50_inline: "ऋण परिपक्वता के समय संपत्ति की आयु 50 वर्ष से अधिक नहीं होनी चाहिए।",
+                rej_prop_age_min_5: "कुछ संपत्ति प्रकारों का कम से कम 5 वर्ष पुराना होना आवश्यक है।",
+                rej_prop_age_max_40: "आवेदन के समय संपत्ति की आयु 40 वर्ष से अधिक है।",
+                rej_prop_age_max_maturity_50: "ऋण परिपक्वता के समय संपत्ति की आयु 50 वर्ष से अधिक है।",
                 
                 Ahmednagar: "अहमदनगर", Akola: "अकोला", Ambajogai: "अंबाजोगाई", Amravati: "अमरावती", Aurangabad: "औरंगाबाद", Baramati: "बारामती", Beed: "बीड", Bhandara: "भंडारा", Bhiwandi: "भिवंडी", Bhusawal: "भुसावल", Boisar: "बोईसर", Borivali: "बोरीवली", Chalisgaon: "चालीसगांव", Chandrapur: "चंद्रपुर", Daryapur: "दर्यापुर", Dharashiv: "धाराशिव", Dhule: "धुले", Gondia: "गोंदिया", Hinganghat: "हिंगणघाट", Ichalkaranji: "इचलकरंजी", Jalgaon: "जलगांव", Jalna: "जालना", Kalyan: "कल्याण", Karad: "कराड", Kharadi: "खराड़ी", Kolhapur: "कोल्हापुर", Kopargaon: "कोपरगांव", Latur: "लातूर", Malegaon: "मालेगांव", Morshi: "मोर्शी", Nagpur: "नागपुर", Nanded: "नांदेड़", Nandurbar: "नंदुरबार", Nashik: "नासिक", Niphad: "निफाड़", Osmanabad: "उस्मानाबाद", Pachora: "पाचोरा", Panvel: "पनवेल", Parbhani: "परभणी", PCMC: "पीसीएमसी", Pusad: "पुसद", Sangamner: "संगमनेर", Sangli: "सांगली", Satara: "सतारा", Shahada: "शहादा", Shirpur: "शिरपुर", Shirur: "शिरूर", Shivajinagar: "शिवाजीनगर", Shrigonda: "श्रीगोंदा", Sinnar: "सिन्नर", Solapur: "सोलापुर", Virar: "विरार", Wardha: "वर्धा", Washim: "वाशिम", Yavatmal: "यवतमाल", Mumbai: "मुंबई", Pune: "पुणे", "Rest of Maharashtra": "शेष महाराष्ट्र", Bhopal: "भोपाल", Dewas: "देवास", Indore: "इंदौर", Ujjain: "उज्जैन", "Rest of Madhya Pradesh": "शेष मध्य प्रदेश", Eluru: "एलुरु", Kakinada: "काकीनाडा", Rajahmundry: "राजमुंदरी", Vijaywada: "विजयवाड़ा", Vishakapatnam: "विशाखापत्तनम", "Rest of Andhra Pradesh": "शेष आंध्र प्रदेश", Ameerpet: "अमीरपेट", "BHEL/Chandan Nagar": "भेल/चंदन नगर", Hanumkonda: "हनमकोंडा", Karimnagar: "करीमनगर", Khammam: "खम्मम", "LB Nagar": "एलबी नगर", Nizamabad: "निजामाबाद", Secunderabad: "सिकंदराबाद", Tarnaka: "तारनाका", "Rest of Telangana": "शेष तेलंगाना", search_loc: "खोजने के लिए टाइप करें...",
                 
@@ -321,7 +337,7 @@ window.i18n = {
                 fup_un_deed_lbl: "సేల్ డీడ్ జనవరి 2019 కి ముందుదా?", fup_un_age_lbl: "ఆస్తి కనీసం 5 సంవత్సరాల పాతదా?", fup_un_zone_lbl: "ఆస్తి రెసిడెన్షియల్ జోన్‌లో ఉందా?",
                 fup_gp_age_lbl: "ఆస్తి కనీసం 5 సంవత్సరాల పాతదా?", fup_gp_g2_lbl: "నిర్మాణం G+2 కి పరిమితమా?",
                 fup_pat_age_lbl: "పట్టా కనీసం 3 సంవత్సరాల పాతదా?", fup_pat_size_lbl: "ప్లాట్ <= 3000 చ.అ. ఉందా?",
-                fup_np_tax_lbl: "13 సంవత్సరాల పన్ను రికార్డు ఉందా?", fup_np_age_lbl: "ఆస్తి 5 సంవత్సరాల పాతది మరియు G+2 ఉందా?",
+                fup_np_tax_lbl: "13 సంవత్సరాల పన్ను రికార్డు ఉందా?", fup_np_g2_lbl: "నిర్మాణం G+2 కి పరిమితమా?",
                 fup_nota_mc_lbl: "ఆస్తి మున్సిపల్ పరిధిలో ఉందా?",
                 fup_ap_deed_lbl: "రిజిస్టర్డ్ డీడ్ ఎంత పాతది?", lt12: "< 12 నెలలు", "12_3": "12 నెలల నుండి 3 సంవత్సరాలు", gt3: "> 3 సంవత్సరాలు",
                 fup_add_next_lbl: "నిర్మాణం ఆమోదించబడిన అంతస్తు పక్కనే ఉందా?", fup_add_age_lbl: "కనీసం 5 సంవత్సరాల పాతదా?",
@@ -329,6 +345,14 @@ window.i18n = {
                 warn_gk_road: "గ్రామకంఠం ఆస్తులకు కనీసం 8 అడుగుల వెడల్పుతో మోటారు రోడ్డు తప్పనిసరి.", warn_gk_ec: "గ్రామకంఠం న్యాయ క్లియరెన్స్ కోసం 13 సంవత్సరాల EC మరియు 13 ఏళ్ల పన్ను రసీదులు లేదా తహశీల్దార్/మండల రెవెన్యూ లెటర్ తప్పనిసరి.",
                 warn_gk_hl: "గ్రామకంఠం ఆస్తులకు LAP లావాదేవీలు మాత్రమే. హోమ్ లోన్‌లు అనుమతించబడవు.", warn_gk_construction: "గ్రామకంఠం నిధులు పూర్తి ఆస్తులకు (భూమి + నిర్మాణం) మాత్రమే.",
                 warn_gk_tenure_cap: "గ్రామకంఠం వ్యవధి 120 నెలలకు (10 సంవత్సరాలు) పరిమితం.", warn_gk_loan_cap: "గ్రామకంఠం గరిష్ట రుణ మొత్తం ₹20 లక్షలకు పరిమితం.",
+                
+                q_prop_age_label: "ఆస్తి వయస్సు (సంవత్సరాలలో) ఎంత?",
+                warn_prop_age_min_5_inline: "నిధుల కోసం ఈ నిర్దిష్ట ఆస్తి రకం కనీసం 5 సంవత్సరాలు ఉండాలి.",
+                warn_prop_age_max_40_inline: "లోన్ దరఖాస్తు సమయంలో ఆస్తి వయస్సు 40 సంవత్సరాలకు మించకూడదు.",
+                warn_prop_age_max_maturity_50_inline: "లోన్ మెచ్యూరిటీ సమయంలో ఆస్తి వయస్సు 50 సంవత్సరాలకు మించకూడదు.",
+                rej_prop_age_min_5: "కొన్ని ఆస్తి రకాలు కనీసం 5 సంవత్సరాలు ఉండాలి.",
+                rej_prop_age_max_40: "దరఖాస్తు సమయంలో ఆస్తి వయస్సు గరిష్టంగా 40 సంవత్సరాలకు మించిపోయింది.",
+                rej_prop_age_max_maturity_50: "లోన్ మెచ్యూరిటీ సమయంలో ఆస్తి వయస్సు గరిష్టంగా 50 సంవత్సరాలకు మించిపోయింది.",
                 Ahmednagar: "అహ్మద్‌నగర్", Akola: "అకోలా", Ambajogai: "అంబాజోగై", Amravati: "అమరావతి", Aurangabad: "ఔరంగాబాద్", Baramati: "బారామతి", Beed: "బీడ్", Bhandara: "భండారా", Bhiwandi: "భివాండి", Bhusawal: "భుసావల్", Boisar: "బోయిసర్", Borivali: "బోరివలి", Chalisgaon: "చాలీస్‌గావ్", Chandrapur: "చంద్రపూర్", Daryapur: "దర్యాపూర్", Dharashiv: "ధారాశివ్", Dhule: "ధూలే", Gondia: "గోండియా", Hinganghat: "హింగన్‌ఘాట్", Ichalkaranji: "ఇచల్‌కరంజి", Jalgaon: "జలగావ్", Jalna: "జాల్నా", Kalyan: "కళ్యాణ్", Karad: "కరాడ్", Kharadi: "ఖరాడీ", Kolhapur: "కొల్హాపూర్", Kopargaon: "కోపర్‌గావ్", Latur: "లాతూర్", Malegaon: "మాలెగావ్", Morshi: "మోర్షీ", Nagpur: "నాగ్‌పూర్", Nanded: "నాందేడ్", Nandurbar: "నందుర్బార్", Nashik: "నాసిక్", Niphad: "నిఫాడ్", Osmanabad: "ఉస్మానాబాద్", Pachora: "పచోరా", Panvel: "పన్వెల్", Parbhani: "పర్భనీ", PCMC: "పిసిఎంసి", Pusad: "పుసాద్", Sangamner: "సంగమ్నేర్", Sangli: "సాంగ్లీ", Satara: "సతారా", Shahada: "షహదా", Shirpur: "షిర్పూర్", Shirur: "షిరూర్", Shivajinagar: "శివాజీనగర్", Shrigonda: "శ్రీగొండ", Sinnar: "సిన్నార్", Solapur: "సోలాపూర్", Virar: "విరార్", Wardha: "వార్ధా", Washim: "వాషిమ్", Yavatmal: "యావత్మాల్", Mumbai: "ముంబై", Pune: "పూణే", "Rest of Maharashtra": "మిగిలిన మహారాష్ట్ర", Bhopal: "భోపాల్", Dewas: "దేవాస్", Indore: "ఇండోర్", Ujjain: "ఉజ్జయిని", "Rest of Madhya Pradesh": "మిగిలిన మధ్యప్రదేశ్", Eluru: "ఏలూరు", Kakinada: "కాకినాడ", Rajahmundry: "రాజమండ్రి", Vijaywada: "విజయవాడ", Vishakapatnam: "విశాఖపట్నం", "Rest of Andhra Pradesh": "మిగిలిన ఆంధ్రప్రదేశ్", Ameerpet: "అమీర్‌పేట్", "BHEL/Chandan Nagar": "భెల్/చందన్ నగర్", Hanumkonda: "హనుమకొండ", Karimnagar: "కరీంనగర్", Khammam: "ఖమ్మం", "LB Nagar": "ఎల్బీ నగర్", Nizamabad: "నిజామాబాద్", Secunderabad: "సికింద్రాబాద్", Tarnaka: "తార్నాక", "Rest of Telangana": "మిగిలిన తెలంగాణ", search_loc: "శోధించడానికి టైప్ చేయండి...",
                 
                 doc_base_1: "KYC పత్రాలు (PAN, ఆధార్/చిరునామా రుజువు) OSV స్టాంప్ మరియు స్వీయ-ధృవీకరణతో.", doc_base_2: "తాజా 6 నెలల ప్రాథమిక బ్యాంక్ ఖాతా స్టేట్‌మెంట్‌లు.", doc_base_3: "తాజా ఆస్తి పన్ను రసీదు మరియు విద్యుత్ బిల్లు.",
@@ -424,7 +448,7 @@ window.i18n = {
                 fup_un_deed_lbl: "विक्री करार जानेवारी 2019 पूर्वीचा आहे का?", fup_un_age_lbl: "मालमत्ता 5 वर्षे जुनी आहे का?", fup_un_zone_lbl: "निवासी झोनमध्ये आहे का?",
                 fup_gp_age_lbl: "मालमत्ता 5 वर्षे जुनी आहे का?", fup_gp_g2_lbl: "बांधकाम G+2 मर्यादित आहे का?",
                 fup_pat_age_lbl: "पट्टा 3 वर्षे जुना आहे का?", fup_pat_size_lbl: "प्लॉट <= 3000 चौ.फू. आहे का?",
-                fup_np_tax_lbl: "13 वर्षांची कर नोंद आहे का?", fup_np_age_lbl: "मालमत्ता 5 वर्षे आणि G+2 आहे का?",
+                fup_np_tax_lbl: "13 वर्षांची कर नोंद आहे का?", fup_np_g2_lbl: "बांधकाम G+2 मर्यादित आहे का?",
                 fup_nota_mc_lbl: "मालमत्ता महानगरपालिकेत आहे का?",
                 fup_ap_deed_lbl: "नोंदणीकृत करार किती जुना आहे?", lt12: "< 12 महिने", "12_3": "12 महिने ते 3 वर्षे", gt3: "> 3 वर्षे",
                 fup_add_next_lbl: "बांधकाम मंजूर मजल्याच्या शेजारी आहे का?", fup_add_age_lbl: "किमान 5 वर्षे जुनी आहे का?",
@@ -432,6 +456,14 @@ window.i18n = {
                 warn_gk_road: "ग्रामकंठम मालमत्तांसाठी किमान 8 फुट रुंद मोटारयोग्य रस्ता अनिवार्य आहे.", warn_gk_ec: "ग्रामकंठम कायदेशीर मंजुरीसाठी 13 वर्षांचे EC आणि 13 वर्षे जुन्या कर पावत्या किंवा तहसीलदार/मंडळ महसूल पत्र अनिवार्य आहे.",
                 warn_gk_hl: "ग्रामकंठम मालमत्तांसाठी केवळ LAP व्यवहारांना परवानगी आहे. गृह कर्ज दिले जात नाही.", warn_gk_construction: "ग्रामकंठम मालमत्तांसाठी केवळ पूर्ण मालमत्ता (जमीन + बांधकाम) निधी दिले जाते.",
                 warn_gk_tenure_cap: "ग्रामकंठम कालावधी 120 महिन्यांपर्यंत (10 वर्षे) मर्यादित.", warn_gk_loan_cap: "ग्रामकंठम कमाल कर्ज रक्कम ₹20 लाख मर्यादित.",
+                
+                q_prop_age_label: "मालमत्तेचे वय (वर्षांमध्ये) काय आहे?",
+                warn_prop_age_min_5_inline: "कर्जासाठी हा विशिष्ट मालमत्ता प्रकार किमान 5 वर्षे जुना असणे आवश्यक आहे.",
+                warn_prop_age_max_40_inline: "कर्ज अर्जाच्या वेळी मालमत्तेचे वय 40 वर्षांपेक्षा जास्त नसावे.",
+                warn_prop_age_max_maturity_50_inline: "कर्ज परिपक्वतेच्या वेळी मालमत्तेचे वय 50 वर्षांपेक्षा जास्त नसावे.",
+                rej_prop_age_min_5: "विशिष्ट मालमत्ता प्रकार किमान 5 वर्षे जुने असणे आवश्यक आहे.",
+                rej_prop_age_max_40: "अर्जाच्या वेळी मालमत्तेचे वय जास्तीत जास्त 40 वर्षांपेक्षा जास्त आहे.",
+                rej_prop_age_max_maturity_50: "कर्ज परिपक्वतेच्या वेळी मालमत्तेचे वय 50 वर्षांपेक्षा जास्त आहे.",
                 
                 Ahmednagar: "अहमदनगर", Akola: "अकोला", Ambajogai: "अंबाजोगाई", Amravati: "अमरावती", Aurangabad: "औरंगाबाद", Baramati: "बारामती", Beed: "बीड", Bhandara: "भंडारा", Bhiwandi: "भिवंडी", Bhusawal: "भुसावळ", Boisar: "बोईसर", Borivali: "बोरीवली", Chalisgaon: "चाळीसगाव", Chandrapur: "चंद्रपूर", Daryapur: "दर्यापूर", Dharashiv: "धाराशिव", Dhule: "धुळे", Gondia: "गोंदिया", Hinganghat: "हिंगणघाट", Ichalkaranji: "इचलकरंजी", Jalgaon: "जळगाव", Jalna: "जालना", Kalyan: "कल्याण", Karad: "कराड", Kharadi: "खराडी", Kolhapur: "कोल्हापूर", Kopargaon: "कोपरगाव", Latur: "लातूर", Malegaon: "मालेगाव", Morshi: "मोर्शी", Nagpur: "नागपूर", Nanded: "नांदेड", Nandurbar: "नंदुरबार", Nashik: "नाशिक", Niphad: "निफाड", Osmanabad: "उस्मानाबाद", Pachora: "पाचोरा", Panvel: "पनवेल", Parbhani: "परभणी", PCMC: "पिंपरी-चिंचवड", Pusad: "पुसद", Sangamner: "संगमनेर", Sangli: "सांगली", Satara: "सातारा", Shahada: "शहादा", Shirpur: "शिरपूर", Shirur: "शिरूर", Shivajinagar: "शिवाजीनगर", Shrigonda: "श्रीगोंदा", Sinnar: "सिन्नर", Solapur: "सोलापूर", Virar: "विरार", Wardha: "वर्धा", Washim: "वाशिम", Yavatmal: "यवतमाळ", Mumbai: "मुंबई", Pune: "पुणे", "Rest of Maharashtra": "उर्वरित महाराष्ट्र", Bhopal: "भोपाळ", Dewas: "देवास", Indore: "इंदूर", Ujjain: "उज्जैन", "Rest of Madhya Pradesh": "उर्वरित मध्य प्रदेश", Eluru: "एलुरु", Kakinada: "काकीनाडा", Rajahmundry: "राजमुंदरी", Vijaywada: "विजयवाडा", Vishakapatnam: "विशाखापट्टणम", "Rest of Andhra Pradesh": "उर्वरित आंध्र प्रदेश", Ameerpet: "अमीरपेट", "BHEL/Chandan Nagar": "भेल/चंदन नगर", Hanumkonda: "हनमकोंडा", Karimnagar: "करीमनगर", Khammam: "खम्मम", "LB Nagar": "एलबी नगर", Nizamabad: "निजामाबाद", Secunderabad: "सिकंदराबाद", Tarnaka: "तारनाका", "Rest of Telangana": "उर्वरित तेलंगणा", search_loc: "शोधण्यासाठी टाइप करा...",
                 
